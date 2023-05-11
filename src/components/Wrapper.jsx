@@ -1,25 +1,7 @@
-import './App.css'
-import { Wrapper } from './components/Wrapper'
-
-
-function App() {
-  
-  return (
-    <div>
-      <Wrapper />
-    </div>
-  )
-}
-
-export default App
-
-
-/*import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
-import { MyButton } from './components/MyButton'
-import { Title } from './components/Title'
-import { Question } from './components/Question'
+import { useState } from 'react'
+import './Wrapper.css'
+import { Title } from './Title'
+import { Question } from './Question'
 
 const questions = {
   1: {
@@ -32,7 +14,7 @@ const questions = {
       2: 'Lorem ipsum dolor sit amet consectetur.',
       3: 'Lorem ipsum dolor sit amet, consectetur adipisicing.',
       4: 'Lorem ipsum dolor sit amet.',
-    }
+    },
   },
   2: {
     index: '2',
@@ -44,12 +26,12 @@ const questions = {
       2: '22222222222',
       3: '3333333333',
       4: '444444444',
-    }
-  }
+    },
+  },
 }
 
 // responsesState = [{response: "xyz", index: ""}, {response: "abc", index: ""}]
-function App() {
+export function Wrapper() {
   const [questionNumber, setQuestionNumber] = useState(1)
 
   return (
@@ -64,5 +46,3 @@ function App() {
   )
 }
 
-export default App
-*/

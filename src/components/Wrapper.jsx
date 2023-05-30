@@ -89,16 +89,3 @@ export function Wrapper({ user_id }) {
   }
 }
 
-/*
-  return (
-    <div>
-      <Title />
-      <Question
-        questionData={questions[questionNumber]}
-        current_index={questionNumber}
-        incrementQuestionNumber={() => setQuestionNumber(questionNumber + 1)}
-      />
-    </div>
-  )
-}
-*/

@@ -1,0 +1,27 @@
+.main-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color:#677d98;
+  color: white;
+}
+
+
+
+.take-test-link {
+  color: white;
+  font-size: 35px ;
+  text-decoration: none;
+  margin-left: 1rem;
+}
+
+.take-test-link:hover {
+  text-decoration: underline;
+}

@@ -1,10 +1,10 @@
 import './MainPageWrapper.css'
 import { MainPage } from './MainPage'
 
-export function MainPageWrapper() {
+export function MainPageWrapper({ user_id }) {
   return (
     <div>
-      <MainPage />
+      <MainPage user_id={user_id} />
     </div>
   )
 }

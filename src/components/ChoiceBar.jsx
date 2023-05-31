@@ -1,9 +1,11 @@
 import './ChoiceBar.css'
+import React, { useContext } from 'react'
+import QuestionContext from './QuestionContext'
 
 export function ChoiceBar(props) {
   //const { choice, onclick } = props
-  const { question_index, choice, onChoiceSelect, incrementQuestionNumber } =
-    props
+  const { question_index, choice, onChoiceSelect} = props
+  const { incrementQuestionNumber } = useContext(QuestionContext)
 
   const onclick = () => {
     incrementQuestionNumber()

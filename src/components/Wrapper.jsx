@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import './Wrapper.css'
 import { Title } from './Title'
 import { Question } from './Question'
+import QuestionContext from './QuestionContext'
 
 // responsesState = [{response: "xyz", index: ""}, {response: "abc", index: ""}]
 export function Wrapper({ user_id }) {
@@ -56,7 +57,7 @@ export function Wrapper({ user_id }) {
   }
 
   async function handleSubmit(responses, user_id) {
-    const id = 1
+
     const response = await fetch(
       'http://127.0.0.1:8000/bias_test/api/submit-choice/',
       {
@@ -73,15 +74,17 @@ export function Wrapper({ user_id }) {
 
   if (currentQuestionIndex <= 4) {
     return (
-      <div>
-        <Title />
-        <Question
-          questionData={questions[currentQuestionIndex]}
-          current_index={currentQuestionIndex + 1}
-          incrementQuestionNumber={incrementQuestionNumber}
-          saveResponse={saveResponse}
-        />
-      </div>
+      <QuestionContext.Provider value={{ incrementQuestionNumber }}>
+        <div>
+          <Title />
+          <Question
+            questionData={questions[currentQuestionIndex]}
+            current_index={currentQuestionIndex + 1}
+            
+            saveResponse={saveResponse}
+          />
+        </div>
+      </QuestionContext.Provider>
     )
   } else {
     handleSubmit(responses, user_id)

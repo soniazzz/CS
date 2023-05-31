@@ -1,11 +1,14 @@
 import './Question.css'
 import { ChoiceBar } from './ChoiceBar'
+import React, { useContext } from 'react'
+import QuestionContext from './QuestionContext'
+
 export function Question(props) {
-  const { questionData, current_index, incrementQuestionNumber, saveResponse } =
-    props
+  const { questionData, current_index, saveResponse } = props
   //const { index, question, description, choices } = questionData
   const { question, choices, index } = questionData
   const letterIndex = ['A', 'B', 'C', 'D']
+  const { incrementQuestionNumber } = useContext(QuestionContext)
   function onChoiceSelect(points) {
     saveResponse(index, points)
   }

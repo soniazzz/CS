@@ -1,0 +1,58 @@
+h1 {
+ font-size: 80px;
+  margin-bottom: 30px;
+  color: #677d98;
+}
+
+form {
+  font-size: 30px;
+  flex-direction: column;
+}
+
+label {
+  display: inline-block;
+  width: 150px;
+  text-align: right;
+  font-size: 30px;
+  margin-bottom: 5px;
+  color: #677d98;
+}
+
+input {
+  width: 40%;
+  font-size: 30px;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #677d98;
+  border-radius: 5px;
+}
+
+button {
+  font-size: 30px;
+  padding: 10px;
+  background-color: #677d98;
+  color: #ffffff;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+button:hover {
+  background-color: #5c6f89;
+}
+
+p {
+  font-size: 20px;
+  text-align: center;
+  color: #677d98;
+}
+
+a {
+  color: #36414f;
+  text-decoration: underline;
+}
+
+a:hover {
+  text-decoration: underline;
+}

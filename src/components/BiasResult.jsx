@@ -34,28 +34,32 @@ export function BiasResult({ user_id }) {
         <h1>Bias Test Results</h1>
       </div>
       <br></br>
-      <table>
-        <thead>
-          <tr>
-            <th>Bias Type</th>
-            <th>Possibility</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Object.entries(results).map(([bias, possibility], index) => (
-            <tr key={index}>
-              <td>{bias}</td>
-              <td>{possibility.toFixed(2)}</td>
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>Bias Type</th>
+              <th>Possibility</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {Object.entries(results).map(([bias, possibility], index) => (
+              <tr key={index}>
+                <td>{bias}</td>
+                <td>{possibility}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <br></br>
-      <h2>You have finished the bias test.</h2>
-      <div className='result-message'>
-        <h2>
-          You can review the result in <Link to='/'>My Home</Link>.
-        </h2>
+      <div>
+        <h6>You have finished the bias test.</h6>
+        <div className='result-message'>
+          <h6>
+            You can review the result in <Link to='/'>My Home</Link>.
+          </h6>
+        </div>
       </div>
     </div>
   )

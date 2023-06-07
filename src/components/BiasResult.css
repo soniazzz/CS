@@ -15,10 +15,10 @@
 }
 
 table {
-  width: 80%;
+  width: 60%;
   border-collapse: collapse;
   margin: 1rem auto;
-  font-size: 30px;
+  font-size: 17px;
 }
 
 table th,
@@ -31,7 +31,7 @@ table td {
 table th {
   background-color: #677d98;
   color: white;
-  font-size: 35px;
+  font-size: 17px;
 }
 
 table tbody tr:nth-child(odd) {
@@ -40,7 +40,7 @@ table tbody tr:nth-child(odd) {
 
 table tbody tr:hover {
   background-color: #ddd;
-  font-size: 32px;
+  font-size: 20px;
   
 }
 
@@ -71,3 +71,4 @@ table td:nth-child(2) {
   text-decoration: underline;
   color: #677d98;
 }
+

@@ -12,19 +12,34 @@ import { useState } from 'react'
 
 function App() {
   const [user_id, setUserId] = useState(null)
-
-  function handleLogin(UserId){
-    console.log("UserID"+UserId)
+  /*
+  function handleLogin(UserId) {
+    console.log('UserID' + UserId)
     setUserId(UserId)
     console.log(user_id)
+  }
+  function checkLoad() {
+    if (user_id == null) {
+      return false
+    } else {
+      return true
+    }
+  }
+  */
+  
+function handleLogin(UserId) {
+  setUserId(UserId)
+  console.log('UserID' + user_id)
+}
+    /*
     if (user_id==null){
       return false
     }
     else{
       return true
     }
-  }
-
+    
+}*/
 
   return (
     <div className='App'>

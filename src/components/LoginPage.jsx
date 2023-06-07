@@ -9,13 +9,22 @@ export function LoginPage(props) {
   })
   const [loginSuccessful, setLoginSuccessful] = useState(false)
   const navigate = useNavigate()
+  /*const [Loading, setLoading] = useState(true)
 
 
- useEffect(() => {
-   if (loginSuccessful) {
-     navigate('/')
-   }
- }, [loginSuccessful, navigate])
+  useEffect(() => {
+    if (Loading) {
+      alert("loading")
+    }
+  }, [Loading])
+  */
+  /*
+  useEffect(() => {
+    if (loginSuccessful) {
+      navigate('/')
+    }
+  }, [loginSuccessful, navigate])
+  */
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value })
@@ -40,9 +49,23 @@ export function LoginPage(props) {
         alert('Wrong password.')
       } else {
         console.log(data.user_id)
+        
+        props.onLogin(data.user_id)
+        navigate('/')
+
+        /*
+        while (props.checkLoad()===true){
+          alert("Loading")
+        }
+        setLoginSuccessful(true)
+        */
+        /*
         if (props.onLogin(data.user_id)) {
           setLoginSuccessful(true)
+        } else {
+          alert('loading')
         }
+        */
       }
     } else {
       alert('Error logging in. Please try again.')

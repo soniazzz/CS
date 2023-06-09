@@ -7,6 +7,7 @@ import { BiasResult } from './components/BiasResult'
 import { LoginPage } from './components/LoginPage'
 import { SignupPage } from './components/SignUpPage'
 import { ProfileEdit } from './components/ProfileEdit'
+import { LearningIntro } from './components/LearningIntro'
 import { useState } from 'react'
 
 
@@ -59,6 +60,10 @@ function handleLogin(UserId) {
         <Route
           path='/edit-profile'
           element={<ProfileEdit user_id={user_id} />}
+        />
+        <Route
+          path='/learning'
+          element={<LearningIntro />}
         />
       </Routes>
     </div>

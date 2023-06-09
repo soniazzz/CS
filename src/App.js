@@ -6,6 +6,7 @@ import { Biastest } from './components/Biastest'
 import { BiasResult } from './components/BiasResult'
 import { LoginPage } from './components/LoginPage'
 import { SignupPage } from './components/SignUpPage'
+import { ProfileEdit } from './components/ProfileEdit'
 import { useState } from 'react'
 
 
@@ -29,7 +30,7 @@ function App() {
   
 function handleLogin(UserId) {
   setUserId(UserId)
-  console.log('UserID' + user_id)
+  console.log('UserIDnew' + user_id)
 }
     /*
     if (user_id==null){
@@ -44,7 +45,10 @@ function handleLogin(UserId) {
   return (
     <div className='App'>
       <Routes>
-        <Route path='/' element={<MainPageWrapper user_id={user_id} />} />
+        <Route
+          path='/'
+          element={<MainPageWrapper user_id={user_id} onLogin={handleLogin} />}
+        />
         <Route path='/bias-test' element={<Biastest user_id={user_id} />} />
         <Route
           path='/bias-results'
@@ -52,6 +56,10 @@ function handleLogin(UserId) {
         />
         <Route path='/login' element={<LoginPage onLogin={handleLogin} />} />
         <Route path='/signup' element={<SignupPage />} />
+        <Route
+          path='/edit-profile'
+          element={<ProfileEdit user_id={user_id} />}
+        />
       </Routes>
     </div>
   )

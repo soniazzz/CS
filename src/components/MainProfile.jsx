@@ -76,7 +76,7 @@ import { Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css'
 
 export function MainProfile(props) {
-  const{user_id}=props
+  const user_id=props.user_id
 
   console.log('MainProfile' + user_id)
 
@@ -96,6 +96,7 @@ export function MainProfile(props) {
 
         setResults(data.data)
         setInfo(data.info)
+        props.onLogin(user_id)
   
       } catch (error) {
         console.error('Error fetching bias results:', error)
@@ -109,7 +110,6 @@ export function MainProfile(props) {
     return <div>Loading...</div>
   }
 
-  console.log(info)
   
 return (
   <div className='container'>
@@ -164,13 +164,13 @@ return (
 
               <div className='row'>
                 <div className='col-sm-12'>
-                  <a
-                    className='btn btn-info '
+                  <Link
+                    to='/edit-profile'
+                    className='btn btn-info'
                     target='__blank'
-                    href='https://www.bootdey.com/snippets/view/profile-edit-data-and-skills'
                   >
                     Edit
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

@@ -5,9 +5,10 @@ import { MainProfile } from './MainProfile'
 
 
 
-export function MainPageWrapper({user_id}) {
-
-  
+export function MainPageWrapper(props) {
+  const user_id=props.user_id
+  console.log('UserID' + user_id)
+ 
   if (user_id==null){
     console.log('UserID' + user_id)
     return(
@@ -16,13 +17,13 @@ export function MainPageWrapper({user_id}) {
       </div>
     )
   }
-  
+
 
   return (
     <div>
       <MainPage user_id={user_id} />
       <main className='main-content'>
-        <MainProfile user_id={user_id}/>
+        <MainProfile user_id={user_id} onLogin={props.onLogin}/>
       </main>
     </div>
   )

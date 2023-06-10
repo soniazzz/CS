@@ -7,11 +7,10 @@ export function MainPageWrapper(props) {
   console.log('UserID' + user_id);
 
   return (
-    <div>
-      <MainPage user_id={user_id} />
+    <MainPage user_id={user_id}>
       <main className="main-content">
         <MainProfile user_id={user_id} onLogin={props.onLogin} />
       </main>
-    </div>
+    </MainPage>
   );
 }

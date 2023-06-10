@@ -1,19 +1,17 @@
-import React from 'react'
-import { Route, Routes } from 'react-router-dom'
-import './App.css'
-import { MainPageWrapper } from './components/MainPageWrapper'
-import { Biastest } from './components/Biastest'
-import { BiasResult } from './components/BiasResult'
-import { LoginPage } from './components/LoginPage'
-import { SignupPage } from './components/SignUpPage'
-import { ProfileEdit } from './components/ProfileEdit'
-import { LearningIntro } from './components/LearningIntro'
-import { useState } from 'react'
-
-
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import './App.css';
+import { MainPageWrapper } from './components/MainPageWrapper';
+import { Biastest } from './components/Biastest';
+import { BiasResult } from './components/BiasResult';
+import { LoginPage } from './components/LoginPage';
+import { SignupPage } from './components/SignUpPage';
+import { ProfileEdit } from './components/ProfileEdit';
+import { LearningIntro } from './components/LearningIntro';
+import { useState } from 'react';
 
 function App() {
-  const [user_id, setUserId] = useState(null)
+  const [user_id, setUserId] = useState(null);
   /*
   function handleLogin(UserId) {
     console.log('UserID' + UserId)
@@ -28,12 +26,13 @@ function App() {
     }
   }
   */
-  
-function handleLogin(UserId) {
-  setUserId(UserId)
-  console.log('UserIDnew' + user_id)
-}
-    /*
+
+  function handleLogin(UserId) {
+    sessionStorage.setItem('session_token', UserId);
+    setUserId(UserId);
+    console.log('UserIDnew' + user_id);
+  }
+  /*
     if (user_id==null){
       return false
     }
@@ -44,33 +43,27 @@ function handleLogin(UserId) {
 }*/
 
   return (
-    <div className='App'>
+    <div className="App">
       <Routes>
+        <Route path="/" element={<MainPageWrapper onLogin={handleLogin} />} />
+        <Route path="/bias-test" element={<Biastest user_id={user_id} />} />
         <Route
-          path='/'
-          element={<MainPageWrapper user_id={user_id} onLogin={handleLogin} />}
-        />
-        <Route path='/bias-test' element={<Biastest user_id={user_id} />} />
-        <Route
-          path='/bias-results'
+          path="/bias-results"
           element={<BiasResult user_id={user_id} />}
         />
-        <Route path='/login' element={<LoginPage onLogin={handleLogin} />} />
-        <Route path='/signup' element={<SignupPage />} />
+        <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
+        <Route path="/signup" element={<SignupPage />} />
         <Route
-          path='/edit-profile'
+          path="/edit-profile"
           element={<ProfileEdit user_id={user_id} />}
         />
-        <Route
-          path='/learning'
-          element={<LearningIntro />}
-        />
+        <Route path="/learning" element={<LearningIntro />} />
       </Routes>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
 
 /*import './App.css'
 import { Wrapper } from './components/Wrapper'

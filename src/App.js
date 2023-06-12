@@ -33,33 +33,33 @@ function App() {
     console.log('UserIDnew' + user_id)
   }
 
-   async function handleLogout() {
-     const session_token = sessionStorage.getItem('session_token')
+  async function handleLogout() {
+    const session_token = sessionStorage.getItem('session_token')
 
-     if (session_token) {
-       try {
-         const response = await fetch(
-           'http://127.0.0.1:8000/bias_test/api/logout/',
-           {
-             method: 'POST',
-             headers: {
-               'Content-Type': 'application/json',
-             },
-             body: JSON.stringify({ user_id: session_token }),
-           }
-         )
+    if (session_token) {
+      try {
+        const response = await fetch(
+          'http://127.0.0.1:8000/bias_test/api/logout/',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ user_id: session_token }),
+          }
+        )
 
-         if (response.ok) {
-           sessionStorage.removeItem('session_token')
-           setUserId(null)
-         } else {
-           console.error('Error logging out')
-         }
-       } catch (error) {
-         console.error('Error logging out:', error)
-       }
-     }
-   }
+        if (response.ok) {
+          sessionStorage.removeItem('session_token')
+          setUserId(null)
+        } else {
+          console.error('Error logging out')
+        }
+      } catch (error) {
+        console.error('Error logging out:', error)
+      }
+    }
+  }
   /*
     if (user_id==null){
       return false
@@ -73,7 +73,12 @@ function App() {
   return (
     <div className='App'>
       <Routes>
-        <Route path='/' element={<MainPageWrapper onLogin={handleLogin} logout={handleLogout}/>} />
+        <Route
+          path='/'
+          element={
+            <MainPageWrapper onLogin={handleLogin} logout={handleLogout} />
+          }
+        />
         <Route path='/bias-test' element={<Biastest user_id={user_id} />} />
         <Route
           path='/bias-results'

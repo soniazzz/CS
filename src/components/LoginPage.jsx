@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'
 import './SignUpPage.css'
 
 export function LoginPage(props) {
@@ -7,8 +7,25 @@ export function LoginPage(props) {
     username: '',
     password: '',
   })
-  const [loginSuccessful, setLoginSuccessful] = useState(false)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const fn = async () => {
+      const response = await fetch(
+        'http://127.0.0.1:8000/bias_test/api/authenticate-session',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            session_token: sessionStorage.getItem('session_token'),
+          }),
+        }
+      )
+      if (response.ok) navigate('/')
+    }
+    fn()
+  }, [])
+
   /*const [Loading, setLoading] = useState(true)
 
 
@@ -49,7 +66,7 @@ export function LoginPage(props) {
         alert('Wrong password.')
       } else {
         console.log(data.user_id)
-        
+
         props.onLogin(data.user_id)
         navigate('/')
 
@@ -104,3 +121,4 @@ export function LoginPage(props) {
     </div>
   )
 }
+ 

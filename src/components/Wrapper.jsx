@@ -22,6 +22,7 @@ export function Wrapper({ user_id }) {
       handleSubmit(responses, user_id).then(() => {
         navigate('/bias-results')
       })
+    
     }
   }, [isSubmitted])
 

@@ -34,6 +34,17 @@
   text-decoration: underline;
 }
 
+.logout{
+  color: white;
+  padding: 10px;
+  font-size: 13px ;
+  text-decoration: none;
+  margin-left: 1rem;
+}
+.logout:hover {
+  
+  text-decoration: underline;
+}
 
 .navbar {
   width: 100%;

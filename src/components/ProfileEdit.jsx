@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 
 export function ProfileEdit(props) {
-   const user_id = props.user_id
-   console.log(user_id)
+  const user_id = sessionStorage.getItem('session_token')
+  console.log(user_id)
 
   const [formData, setFormData] = useState({
     username: '',
     team: '',
     phone_number: '',
+    avatar:'',
   })
 
   const handleChange = (event) => {
@@ -75,7 +76,16 @@ export function ProfileEdit(props) {
           required
         />
         <br />
-
+        <label htmlFor='Avatar'>Avatar:</label>
+        <input
+          type='text'
+          id='avatar'
+          name='avatar'
+          value={formData.team}
+          onChange={handleChange}
+          required
+        />
+        <br />
         <button type='submit'>Save</button>
       </form>
     </div>

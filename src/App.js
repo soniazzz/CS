@@ -8,6 +8,7 @@ import { LoginPage } from './components/LoginPage'
 import { SignupPage } from './components/SignUpPage'
 import { ProfileEdit } from './components/ProfileEdit'
 import { LearningIntro } from './components/LearningIntro'
+import { LearningArticle } from './components/LearningArticle'
 import { useState } from 'react'
 
 function App() {
@@ -91,6 +92,26 @@ function App() {
           element={<ProfileEdit user_id={user_id} />}
         />
         <Route path='/learning' element={<LearningIntro user_id={user_id} />} />
+        <Route
+          path='/gender-bias'
+          element={<LearningArticle user_id={user_id} />}
+        />
+        <Route
+          path='/racial-bias'
+          element={<LearningArticle user_id={user_id} />}
+        />
+        <Route
+          path='/age-bias'
+          element={<LearningArticle user_id={user_id} />}
+        />
+        <Route
+          path='/height-bias'
+          element={<LearningArticle user_id={user_id} />}
+        />
+        <Route
+          path='/affinity-bias'
+          element={<LearningArticle user_id={user_id} />}
+        />
       </Routes>
     </div>
   )

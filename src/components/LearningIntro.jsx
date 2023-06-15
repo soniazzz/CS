@@ -5,8 +5,16 @@ import { LearningIntroArticle } from './LearningIntroArticle'
 import { MainPage } from './MainPage'
 import {LearningNav} from './LearningNav'
 import { useState, useEffect } from 'react'
+import MainFeaturedPost from './Article/MainFeaturedPost.jsx'
 
-
+const mainFeaturedPost = {
+  title: 'Title of a longer featured blog post',
+  description:
+    "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
+  image: 'https://source.unsplash.com/random?wallpapers',
+  imageText: 'main image description',
+  linkText: 'Continue reading…',
+}
 
 export function LearningIntro(props) {
   const user_id = props
@@ -38,11 +46,8 @@ export function LearningIntro(props) {
           <div className='row'>
             <div className='container'>
               <div className='col-md-12'>
-                <img
-                  src='https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://images.ctfassets.net/wp1lcwdav1p1/4gaGhZRGE3Qva8WOpIASCb/bad90ad977b1300fb46978f6093cdfbc/GettyImages-477723122.jpg?w=1500&h=680&q=60&fit=fill&f=faces&fm=jpg&fl=progressive&auto=format%2Ccompress&dpr=2&w=1000&h='
-                  alt='Admin'
-                  width={1050}
-                />
+                <MainFeaturedPost post={mainFeaturedPost} />
+    
               </div>
             </div>
           </div>

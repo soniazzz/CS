@@ -6,7 +6,9 @@ export function LearningNav({ children }) {
   return (
     <div>
       <header className='main-header'>
-        <div className='take-test-head'>Latest Learning Materials</div>
+          <Link to='/learning' className='take-test-link'>
+            Latest Learning Materials
+          </Link>
         <nav>
           <Link to='/gender-bias' className='take-test-link'>
             Gender Bias

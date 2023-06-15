@@ -9,10 +9,12 @@ import { SignupPage } from './components/SignUpPage'
 import { ProfileEdit } from './components/ProfileEdit'
 import { LearningIntro } from './components/LearningIntro'
 import { LearningArticle } from './components/LearningArticle'
-import { useState } from 'react'
+import { useNavigate } from 'react-router-dom' 
 
 function App() {
-  const [user_id, setUserId] = useState(null)
+  const user_id = sessionStorage.getItem('session_token')
+  const navigate = useNavigate()
+  
   /*
   function handleLogin(UserId) {
     console.log('UserID' + UserId)
@@ -30,7 +32,9 @@ function App() {
 
   function handleLogin(UserId) {
     sessionStorage.setItem('session_token', UserId)
-    setUserId(UserId)
+
+
+  
     console.log('UserIDnew' + user_id)
   }
 
@@ -52,7 +56,7 @@ function App() {
 
         if (response.ok) {
           sessionStorage.removeItem('session_token')
-          setUserId(null)
+          navigate('/login')
         } else {
           console.error('Error logging out')
         }

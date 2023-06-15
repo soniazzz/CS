@@ -81,7 +81,7 @@ export function ProfileEdit(props) {
           type='text'
           id='avatar'
           name='avatar'
-          value={formData.team}
+          value={formData.avatar}
           onChange={handleChange}
           required
         />

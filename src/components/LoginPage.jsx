@@ -129,6 +129,7 @@ export function LoginPage(props) {
               name='username'
               autoComplete='username'
               onChange={handleChange}
+              variant='filled'
             />
             <TextField
               margin='normal'

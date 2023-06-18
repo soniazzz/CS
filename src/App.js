@@ -1,20 +1,20 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import { MainPageWrapper } from './components/MainPageWrapper'
+import { MainPageWrapper } from './components/Home/MainPageWrapper'
 import { Biastest } from './components/Biastest'
-import { BiasResult } from './components/BiasResult'
-import { LoginPage } from './components/LoginPage'
-import { SignupPage } from './components/SignUpPage'
-import { ProfileEdit } from './components/ProfileEdit'
-import { LearningIntro } from './components/LearningIntro'
-import { LearningArticle } from './components/LearningArticle'
-import { useNavigate } from 'react-router-dom' 
+import { BiasResult } from './components/BiasTest/BiasResult'
+import { LoginPage } from './components/SignIn/LoginPage'
+import { SignupPage } from './components/SignIn/SignUpPage'
+import { ProfileEdit } from './components/Home/ProfileEdit'
+import { LearningIntro } from './components/Learning/LearningIntro'
+import { LearningArticle } from './components/Learning/LearningArticle'
+import { useNavigate } from 'react-router-dom'
 
 function App() {
   const user_id = sessionStorage.getItem('session_token')
   const navigate = useNavigate()
-  
+
   /*
   function handleLogin(UserId) {
     console.log('UserID' + UserId)
@@ -33,8 +33,6 @@ function App() {
   function handleLogin(UserId) {
     sessionStorage.setItem('session_token', UserId)
 
-
-  
     console.log('UserIDnew' + user_id)
   }
 

@@ -1,9 +1,8 @@
 import React from 'react'
-import './LearningIntro.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import { LearningIntroArticle } from './LearningIntroArticle'
-import { MainPage } from './MainPage'
-import {LearningNav} from './LearningNav'
+import { MainPage } from '../Home/MainPage'
+import { LearningNav } from './LearningNav'
 import { useState, useEffect } from 'react'
 import MainFeaturedPost from './Article/MainFeaturedPost.jsx'
 
@@ -18,7 +17,7 @@ const mainFeaturedPost = {
 
 export function LearningIntro(props) {
   const user_id = props
-  
+
   const [articles, setArticles] = useState([])
   useEffect(() => {
     fetchArticles()
@@ -47,7 +46,6 @@ export function LearningIntro(props) {
             <div className='container'>
               <div className='col-md-12'>
                 <MainFeaturedPost post={mainFeaturedPost} />
-    
               </div>
             </div>
           </div>

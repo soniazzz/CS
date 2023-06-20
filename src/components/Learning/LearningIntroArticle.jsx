@@ -28,7 +28,7 @@ export function LearningIntroArticle(props) {
 
   return (
     <>
-      <Grid item xs={12} md={6} mb={2} mt={2}>
+      <Grid item xs={12} md={6} mb={3} mt={3}>
         <CardActionArea>
           <Card sx={{ display: 'flex', height: 250 }}>
             <CardMedia

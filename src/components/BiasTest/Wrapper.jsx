@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import './Wrapper.css'
-import { Title } from './Title'
 import { Question } from './Question'
+import {ProgressBar} from './ProgressBar'
 import QuestionContext from './QuestionContext'
+import QuizOutlinedIcon from '@mui/icons-material/QuizOutlined'
+import Avatar from '@mui/material/Avatar'
+import Box from '@mui/material/Box'
+import IconButton from '@mui/material/IconButton'
+import ArrowBack from '@mui/icons-material/ArrowBack'
 
 // responsesState = [{response: "xyz", index: ""}, {response: "abc", index: ""}]
 export function Wrapper({ user_id }) {
@@ -22,7 +26,6 @@ export function Wrapper({ user_id }) {
       handleSubmit(responses, user_id).then(() => {
         navigate('/bias-results')
       })
-    
     }
   }, [isSubmitted])
 
@@ -45,6 +48,9 @@ export function Wrapper({ user_id }) {
   function incrementQuestionNumber() {
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1)
   }
+  function decrementQuestionNumber() {
+    setCurrentQuestionIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : 0))
+  }
   function saveResponse(bias_index, points) {
     setResponses({
       ...responses,
@@ -53,12 +59,11 @@ export function Wrapper({ user_id }) {
   }
 
   console.log(responses)
-  if (questions.length == 0) {
+  if (questions.length === 0) {
     return null
   }
 
   async function handleSubmit(responses, user_id) {
-
     const response = await fetch(
       'http://127.0.0.1:8000/bias_test/api/submit-choice/',
       {
@@ -73,17 +78,42 @@ export function Wrapper({ user_id }) {
     console.log('responses sent')
   }
 
-  if (currentQuestionIndex <= 4) {
+  if (currentQuestionIndex <= 9) {
     return (
       <QuestionContext.Provider value={{ incrementQuestionNumber }}>
         <div>
-          <Title />
-          <Question
-            questionData={questions[currentQuestionIndex]}
-            current_index={currentQuestionIndex + 1}
-            
-            saveResponse={saveResponse}
-          />
+          <Box
+            component='main'
+            maxWidth='md'
+            sx={{
+              marginTop: 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <QuizOutlinedIcon />
+            </Avatar>
+
+            <ProgressBar
+              currentQuestionIndex={currentQuestionIndex}
+              totalQuestions={10}
+            />
+            <IconButton
+              onClick={decrementQuestionNumber}
+              disabled={currentQuestionIndex === 0}
+              sx={{ marginBottom: '16px' }}
+            >
+              <ArrowBack />
+            </IconButton>
+
+            <Question
+              questionData={questions[currentQuestionIndex]}
+              current_index={currentQuestionIndex + 1}
+              saveResponse={saveResponse}
+            />
+          </Box>
         </div>
       </QuestionContext.Provider>
     )
@@ -92,4 +122,3 @@ export function Wrapper({ user_id }) {
     return null
   }
 }
-

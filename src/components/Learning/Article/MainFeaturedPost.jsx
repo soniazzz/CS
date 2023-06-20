@@ -22,7 +22,6 @@ function MainFeaturedPost(props) {
         backgroundImage: `url(${post.image})`,
       }}
     >
-      {/* Increase the priority of the hero background image */}
       {
         <img
           style={{ display: 'none' }}
@@ -41,7 +40,7 @@ function MainFeaturedPost(props) {
         }}
       />
       <Grid container>
-        <Grid item md={6}>
+        <Grid item md={8}>
           <Box
             sx={{
               position: 'relative',
@@ -54,15 +53,18 @@ function MainFeaturedPost(props) {
               variant='h3'
               color='inherit'
               gutterBottom
+              textAlign='left'
             >
               {post.title}
             </Typography>
             <Typography variant='h5' color='inherit' paragraph>
               {post.description}
             </Typography>
-            <Link variant='subtitle1' href='#'>
-              {post.linkText}
-            </Link>
+            <Box textAlign='right'>
+              <Link variant='subtitle1' href={post.link}>
+                {post.linkText}
+              </Link>
+            </Box>
           </Box>
         </Grid>
       </Grid>
@@ -77,6 +79,7 @@ MainFeaturedPost.propTypes = {
     imageText: PropTypes.string.isRequired,
     linkText: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    link: PropTypes.string.isRequired,
   }).isRequired,
 }
 

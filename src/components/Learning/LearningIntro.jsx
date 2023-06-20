@@ -6,19 +6,16 @@ import { LearningNav } from './LearningNav'
 import { useState, useEffect } from 'react'
 import MainFeaturedPost from './Article/MainFeaturedPost.jsx'
 
-const mainFeaturedPost = {
-  title: 'Title of a longer featured blog post',
-  description:
-    "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
-  image: 'https://source.unsplash.com/random?wallpapers',
-  imageText: 'main image description',
-  linkText: 'Continue reading…',
-}
+
 
 export function LearningIntro(props) {
   const user_id = props
+  
 
   const [articles, setArticles] = useState([])
+  const [recommend, setRecommend] = useState([])
+
+
   useEffect(() => {
     fetchArticles()
   }, [])
@@ -31,11 +28,23 @@ export function LearningIntro(props) {
         }
       )
       const data = await response.json()
-      console.log(data)
-      setArticles(data)
+      
+      setArticles(data.article)
+      console.log(articles)
+      setRecommend(data.recommend)
+      console.log(recommend)
     } catch (error) {
       console.error('Error fetching articles:', error)
     }
+  }
+
+  const mainFeaturedPost = {
+    title: recommend.head,
+    description: '',
+    image: recommend.img,
+    imageText: 'main image description',
+    linkText: 'Continue reading…',
+    link:recommend.link
   }
 
   return (

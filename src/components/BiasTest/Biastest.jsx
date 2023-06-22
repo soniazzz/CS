@@ -1,6 +1,7 @@
 import { Wrapper } from './Wrapper'
 import { Title } from './Title'
 import { Container } from '@mui/material'
+import Footer from '../Footer.jsx'
 
 export function Biastest({ user_id }) {
   return (
@@ -10,6 +11,7 @@ export function Biastest({ user_id }) {
           <Wrapper user_id={user_id} />
         </Container>
       </Title>
+      <Footer></Footer>
     </div>
   )
 }

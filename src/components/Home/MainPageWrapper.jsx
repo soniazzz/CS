@@ -1,5 +1,6 @@
 import { MainPage } from './MainPage'
 import { MainProfile } from './MainProfile'
+import Footer from '../Footer.jsx'
 
 export function MainPageWrapper(props) {
   const user_id = sessionStorage.getItem('session_token')
@@ -10,6 +11,7 @@ export function MainPageWrapper(props) {
       <main className='main-content'>
         <MainProfile user_id={user_id} onLogin={props.onLogin} />
       </main>
+      <Footer />
     </MainPage>
   )
 }

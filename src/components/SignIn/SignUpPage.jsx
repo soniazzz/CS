@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 //import "./SignUpPage.css"
 import { Container, Typography, TextField, Button, Grid, Box, Avatar} from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
+import Footer from '../Footer.jsx'
 
 
 
@@ -125,60 +126,9 @@ export function SignupPage() {
             Already have an account? <Link to='/login'>Log in</Link>
           </Typography>
         </Box>
+        <Footer />
       </Box>
     </Container>
   )
-  /*
-  return (
-    <div>
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor='username'>Username:</label>
-        <input
-          type='text'
-          id='username'
-          name='username'
-          value={formData.username}
-          onChange={handleChange}
-          required
-        />
-        <br />
-        <label htmlFor='password'>Password:</label>
-        <input
-          type='password'
-          id='password'
-          name='password'
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-        <br />
-        <label htmlFor='team'>Team:</label>
-        <input
-          type='text'
-          id='team'
-          name='team'
-          value={formData.team}
-          onChange={handleChange}
-          required
-        />
-        <br />
-        <label htmlFor='phone'>Phone:</label>
-        <input
-          type='tel'
-          id='phone'
-          name='phone_number'
-          value={formData.phone_number}
-          onChange={handleChange}
-          required
-        />
-        <br />
-        <button type='submit'>Sign up</button>
-      </form>
-      <p>
-        Already have an account? <Link to='/login'>Log in</Link>
-      </p>
-    </div>
-  )
-  */
+
 }

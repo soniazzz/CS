@@ -10,6 +10,7 @@ import { ProfileEdit } from './components/Home/ProfileEdit'
 import { LearningIntro } from './components/Learning/LearningIntro'
 import { LearningArticle } from './components/Learning/LearningArticle'
 import { useNavigate } from 'react-router-dom'
+import { DiscussionForum } from './components/Discussion_Forum/DiscussionForum'
 
 function App() {
   const user_id = sessionStorage.getItem('session_token')
@@ -96,24 +97,25 @@ function App() {
         <Route path='/learning' element={<LearningIntro user_id={user_id} />} />
         <Route
           path='/gender-bias'
-          element={<LearningArticle user_id={user_id} />}
+          element={<LearningArticle user_id={user_id} bias_index={1} />}
         />
         <Route
           path='/racial-bias'
-          element={<LearningArticle user_id={user_id} />}
+          element={<LearningArticle user_id={user_id} bias_index={2} />}
         />
         <Route
           path='/age-bias'
-          element={<LearningArticle user_id={user_id} />}
+          element={<LearningArticle user_id={user_id} bias_index={3} />}
         />
         <Route
           path='/height-bias'
-          element={<LearningArticle user_id={user_id} />}
+          element={<LearningArticle user_id={user_id} bias_index={4} />}
         />
         <Route
           path='/affinity-bias'
-          element={<LearningArticle user_id={user_id} />}
+          element={<LearningArticle user_id={user_id} bias_index={5} />}
         />
+        <Route path='/discussion_forum' element={<DiscussionForum />} />
       </Routes>
     </div>
   )

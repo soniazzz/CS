@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link as RouterLink } from 'react-router-dom'
-import { AppBar, Toolbar, Button, Typography, Box } from '@mui/material'
+import { AppBar, Toolbar, Button, Link, Box } from '@mui/material'
 import LocalLibraryOutlinedIcon from '@mui/icons-material/LocalLibraryOutlined'
 
 export function LearningNav({ children }) {
@@ -9,7 +9,6 @@ export function LearningNav({ children }) {
       <AppBar position='static'>
         <Toolbar>
           <Button
-            to='/learning'
             variant='h6'
             component='div'
             sx={{
@@ -21,8 +20,11 @@ export function LearningNav({ children }) {
               },
             }}
           >
-            Latest Learning Materials
+            <Link sx={{ color: '#fff' }} href='/learning'>
+              Latest Learning Materials
+            </Link>
           </Button>
+          
           <LocalLibraryOutlinedIcon />
 
           <Box sx={{ flexGrow: 1 }} />

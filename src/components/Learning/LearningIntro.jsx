@@ -5,6 +5,7 @@ import { MainPage } from '../Home/MainPage'
 import { LearningNav } from './LearningNav'
 import { useState, useEffect } from 'react'
 import MainFeaturedPost from './Article/MainFeaturedPost.jsx'
+import Footer from '../Footer.jsx'
 
 
 
@@ -75,43 +76,9 @@ export function LearningIntro(props) {
             </div>
           </LearningNav>
         </div>
+        <Footer></Footer>
       </MainPage>
     </div>
   )
 
-  /*
-  return (
-    <div>
-      <MainPage user_id={user_id}>
-        <div className='container'>
-          <div className='row'>
-            <div className='container'>
-              <div className='col-md-12'>
-                <img
-                  src='https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://images.ctfassets.net/wp1lcwdav1p1/4gaGhZRGE3Qva8WOpIASCb/bad90ad977b1300fb46978f6093cdfbc/GettyImages-477723122.jpg?w=1500&h=680&q=60&fit=fill&f=faces&fm=jpg&fl=progressive&auto=format%2Ccompress&dpr=2&w=1000&h='
-                  alt='Admin'
-                  width={1050}
-                />
-              </div>
-            </div>
-
-            
-                <div className='row col-md-12'>
-                  <LearningIntroArticle
-                    type={a1t}
-                    head={a1h}
-                    brief={a1b}
-                    img={a1i}
-                    link={a1l}
-                  />
-                </div>
-              
-
-
-          </div>
-        </div>
-      </MainPage>
-    </div>
-  )
-*/
 }

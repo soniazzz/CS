@@ -4,49 +4,65 @@ import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
 
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-
+import { useState, useEffect } from 'react'
 import MainFeaturedPost from './MainFeaturedPost.jsx'
 import FeaturedPost from './FeaturedPost.jsx'
+import Pagination from '@mui/material/Pagination'
+import Box from '@mui/material/Box'
 
-import Footer from './Footer.jsx'
+import Footer from '../../Footer.jsx'
 
-
-
-const mainFeaturedPost = {
-  title: 'Title of a longer featured blog post',
-  description:
-    "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
-  image: 'https://source.unsplash.com/random?wallpapers',
-  imageText: 'main image description',
-  linkText: 'Continue reading…',
-}
-
-const featuredPosts = [
-  {
-    title: 'Featured post',
-    date: 'Nov 12',
-    description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://source.unsplash.com/random?wallpapers',
-    imageLabel: 'Image Text',
-  },
-  {
-    title: 'Post title',
-    date: 'Nov 11',
-    description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://source.unsplash.com/random?wallpapers',
-    imageLabel: 'Image Text',
-  },
-]
-
-
-
-// TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme()
 
 export function Blog(props) {
+  const { bias_index } = props
+  const [articles, setArticles] = useState([])
+  const [recommend, setRecommend] = useState([])
+  const [page, setPage] = useState(1)
+  const [maxPages, setMaxPages] = useState(0)
+
+  useEffect(() => {
+    setPage(1)
+    console.log(page)
+    fetchArticles()
+  }, [bias_index])
+
+
+  useEffect(() => {
+    fetchArticles()
+  }, [page])
+
+  async function fetchArticles() {
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/bias_test/api/get-articles_of_type/${bias_index}/${page}`,
+        {
+          method: 'GET',
+        }
+      )
+      const data = await response.json()
+      setArticles(data.article)
+      setRecommend(data.recommend)
+      const totalPages = Math.ceil(data.total / 6)
+      setMaxPages(totalPages)
+    } catch (error) {
+      console.error('Error fetching articles:', error)
+    }
+  }
+  function handlePageChange(event, value) {
+    setPage(value)
+  }
   
+
+  const mainFeaturedPost = {
+    title: recommend.head,
+    description: '',
+    image: recommend.img,
+    imageText: 'main image description',
+    linkText: 'Continue reading…',
+    link: recommend.link,
+  }
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
@@ -54,22 +70,22 @@ export function Blog(props) {
         <main>
           <MainFeaturedPost post={mainFeaturedPost} />
           <Grid container spacing={4}>
-            {featuredPosts.map((post) => (
-              <FeaturedPost key={post.title} post={post} />
+            {articles.map((post) => (
+              <FeaturedPost key={post.head} post={post} />
             ))}
           </Grid>
           <br></br>
-          <Grid container spacing={4}>
-            {featuredPosts.map((post) => (
-              <FeaturedPost key={post.title} post={post} />
-            ))}
-          </Grid>
-          <br></br>
-          <Grid container spacing={4}>
-            {featuredPosts.map((post) => (
-              <FeaturedPost key={post.title} post={post} />
-            ))}
-          </Grid>
+          <Box display='flex' justifyContent='center' marginTop={4}>
+            <Pagination
+              count={maxPages}
+              page={page}
+              onChange={handlePageChange}
+              color='primary'
+              size='large'
+              showFirstButton
+              showLastButton
+            />
+          </Box>
         </main>
       </Container>
       <Footer />

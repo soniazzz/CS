@@ -2,7 +2,7 @@ import React from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
-import IconButton from '@mui/material/IconButton'
+import Link from '@mui/material/Link'
 import HomeIcon from '@mui/icons-material/Home'
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
@@ -22,22 +22,24 @@ export function MainPage({ user_id, logout, children }) {
       <AppBar position='static'>
         <Toolbar>
           <Button
-            to='/'
             variant='h6'
             component='div'
             sx={{
               color: '#fff',
-              
+
               '&:hover': {
                 color: 'rgba(0, 0, 0, 0.87)',
                 backgroundColor: 'rgba(255, 255, 255, 0.9)',
               },
             }}
           >
-            My Home
+            <Link 
+              sx={{color: '#fff'}} 
+              href='/'>My Home</Link>
           </Button>
+
           <HomeIcon />
-      
+
           <Box sx={{ flexGrow: 1 }} />
           <Box>
             {navItems.map((item) => (

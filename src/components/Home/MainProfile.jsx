@@ -68,7 +68,7 @@ export function MainProfile(props) {
 }
 */
 
-//import './MainProfile.css'
+
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 //import 'bootstrap/dist/css/bootstrap.css'
@@ -125,6 +125,7 @@ export function MainProfile(props) {
     return <div>Loading...</div>
   }
   console.log(articles)
+  /*
   return (
     <Container>
       <Box mt={4}>
@@ -248,122 +249,130 @@ export function MainProfile(props) {
         </Grid>
       </Box>
     </Container>
-  )
-  /*
+  )*/
   return (
-    <div className='container'>
-      <div className='main-body'>
-        <div className='row gutters-sm'>
-          <div className='col-md-4 mb-3 card'>
-            <div className='card-body'>
-              <div>
-                <div className='d-flex flex-column align-items-center text-center'>
+    <Container>
+      <Box mt={4}>
+        <Grid container spacing={4}>
+          <Grid item xs={12} md={12}>
+            <Card sx={{ display: 'flex', height: 350 }}>
+              <Grid item xs={12} md={4}>
+                <Grid container justifyContent='center'>
                   <img
                     src={info.avatar}
                     alt='Admin'
                     className='rounded-circle'
-                    width={150}
+                    width={220}
+                    height={220}
                   />
-                  <div className='mt-3'>
-                    <h4>{info.name}</h4>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='col-md-8'>
-            <div className='card mb-3'>
-              <div className='card-body'>
-                <div className='row'>
-                  <div className='col-sm-3'>
-                    <h6 className='mb-0'>Name</h6>
-                  </div>
-                  <div className='col-sm-9 text-secondary'>{info.name}</div>
-                </div>
-                <hr />
+                </Grid>
+                <Box mt={3} textAlign='center'>
+                  <Typography variant='h4'>{info.name}</Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={12} md={8}>
+                <Grid container alignItems='center' spacing={2}>
+                  <Grid item xs={3}>
+                    <Typography>Name</Typography>
+                  </Grid>
+                  <Grid item xs={9}>
+                    <Typography color='text.secondary'>{info.name}</Typography>
+                  </Grid>
 
-                <div className='row'>
-                  <div className='col-sm-3'>
-                    <h6 className='mb-0'>Phone</h6>
-                  </div>
-                  <div className='col-sm-9 text-secondary'>{info.phone}</div>
-                </div>
-                <hr />
+                  <Grid item xs={12}>
+                    <hr />
+                  </Grid>
 
-                <div className='row'>
-                  <div className='col-sm-3'>
-                    <h6 className='mb-0'>Team</h6>
-                  </div>
-                  <div className='col-sm-9 text-secondary'>{info.team}</div>
-                </div>
-                <hr />
+                  <Grid item xs={3}>
+                    <Typography>Phone</Typography>
+                  </Grid>
+                  <Grid item xs={9}>
+                    <Typography color='text.secondary'>{info.phone}</Typography>
+                  </Grid>
 
-                <div className='row'>
-                  <div className='col-sm-12'>
-                    <Link
+                  <Grid item xs={12}>
+                    <hr />
+                  </Grid>
+
+                  <Grid item xs={3}>
+                    <Typography>Team</Typography>
+                  </Grid>
+                  <Grid item xs={9}>
+                    <Typography color='text.secondary'>{info.team}</Typography>
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <hr />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <Button
+                      component={RouterLink}
                       to='/edit-profile'
-                      className='btn btn-info'
-                      target='__blank'
+                      variant='contained'
+                      color='info'
                     >
                       Edit
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className='row gutters-sm'>
-              <div className='col-sm-6 mb-3'>
-                <div className='card h-100'>
-                  <div className='card-body'>
-                    <h6 className='d-flex align-items-center mb-3'>
-                      Bias Possibility
-                    </h6>
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Card>
+          </Grid>
 
-                    {Object.entries(results).map(
-                      ([bias, possibility], index) => (
-                        <div key={index} style={{ textAlign: 'left' }}>
-                          <small>{bias + '：' + possibility}</small>
-                          <div className='progress mb-3' style={{ height: 5 }}>
-                            <div
-                              className='progress-bar bg-primary'
-                              role='progressbar'
-                              style={{ width: possibility }}
-                              aria-valuenow={80}
-                              aria-valuemin={0}
-                              aria-valuemax={100}
-                            />
-                          </div>
-                        </div>
-                      )
-                    )}
-                  </div>
-                </div>
-              </div>
-              <div className='col-sm-6 mb-3'>
-                <div className='card h-100'>
-                  <div className='card-body'>
-                    <h6 className='d-flex align-items-center mb-3'>
-                      Recommended Learning Materials
-                    </h6>
+          <Grid item xs={12} md={12}>
+            <Box mt={4}>
+              <Grid container spacing={4}>
+                <Grid item xs={12} sm={6}>
+                  <Card sx={{ height: 350 }}>
+                    <CardContent>
+                      <Typography variant='h6'>Bias Possibility</Typography>
+                      <Box mt={2}>
+                        {Object.entries(results).map(
+                          ([bias, possibility], index) => (
+                            <Box key={index} textAlign='left' mb={3.5}>
+                              <Typography variant='caption'>
+                                {bias + '：' + possibility}
+                              </Typography>
 
-                    <div>
-                      {articles.map((article) => (
-                        <div key={article.link} style={{ textAlign: 'left' }}>
-                          <a href={article.link}>
-                            <small>{article.head}</small>
-                            <br></br>
-                            <br></br>
-                          </a>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )*/
+                              <LinearProgress
+                                variant='determinate'
+                                value={parseFloat(possibility)}
+                              />
+                            </Box>
+                          )
+                        )}
+                      </Box>
+                    </CardContent>
+                  </Card>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Card sx={{ height: 350 }}>
+                    <CardContent>
+                      <Typography variant='h6'>
+                        Recommended Learning Materials
+                      </Typography>
+                      <Box mt={2} textAlign='left'>
+                        {articles.map((article) => (
+                          <Box key={article.link} mb={2}>
+                            <Link href={article.link} underline='hover'>
+                              <Typography variant='caption'>
+                                {article.head}
+                              </Typography>
+                            </Link>
+                          </Box>
+                        ))}
+                      </Box>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              </Grid>
+            </Box>
+          </Grid>
+        </Grid>
+      </Box>
+    </Container>
+  )
+
+  
 }

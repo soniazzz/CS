@@ -1,25 +1,17 @@
-import React from 'react'
-import 'bootstrap/dist/css/bootstrap.css'
-import { LearningIntroArticle } from './LearningIntroArticle'
-import { MainPage } from '../Home/MainPage'
-import { LearningNav } from './LearningNav'
-import { useState, useEffect } from 'react'
-import MainFeaturedPost from './Article/MainFeaturedPost.jsx'
-import Footer from '../Footer.jsx'
+import { React, useState, useEffect } from 'react'
+import LearningIntroArticle from './LearningIntroArticle'
+import LearningNav from './LearningNav'
+import MainFeaturedPost from './MainFeaturedPost.jsx'
+import { Container, Grid } from '@mui/material'
 
-
-
-export function LearningIntro(props) {
-  const user_id = props
-  
-
+export default function LearningIntro() {
   const [articles, setArticles] = useState([])
   const [recommend, setRecommend] = useState([])
-
 
   useEffect(() => {
     fetchArticles()
   }, [])
+
   async function fetchArticles() {
     try {
       const response = await fetch(
@@ -31,9 +23,7 @@ export function LearningIntro(props) {
       const data = await response.json()
       
       setArticles(data.article)
-      console.log(articles)
       setRecommend(data.recommend)
-      console.log(recommend)
     } catch (error) {
       console.error('Error fetching articles:', error)
     }
@@ -49,36 +39,21 @@ export function LearningIntro(props) {
   }
 
   return (
-    <div>
-      <MainPage user_id={user_id}>
-        <div className='container'>
-          <div className='row'>
-            <div className='container'>
-              <div className='col-md-12'>
-                <MainFeaturedPost post={mainFeaturedPost} />
-              </div>
-            </div>
-          </div>
-
-          <LearningNav>
-            <div>
-              {articles.map((article) => (
-                <div key={article.link}>
-                  <LearningIntroArticle
-                    type={article.bias_index}
-                    head={article.head}
-                    brief={article.brief}
-                    img={article.img}
-                    link={article.link}
-                  />
-                </div>
-              ))}
-            </div>
-          </LearningNav>
-        </div>
-        <Footer></Footer>
-      </MainPage>
-    </div>
+    <Container>
+      <MainFeaturedPost post={mainFeaturedPost} />
+      <LearningNav />
+      <Grid container spacing={3} mt={2}>
+        {articles.map(article => (
+            <LearningIntroArticle
+              key={article.link}
+              head={article.head}
+              brief={article.brief}
+              img={article.img}
+              link={article.link}
+            />
+        ))}
+      </Grid>
+    </Container>
   )
 
 }

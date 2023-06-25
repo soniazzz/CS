@@ -12,9 +12,8 @@ import {
   TableBody,
   Link,
 } from '@mui/material'
-import Footer from '../Footer.jsx'
 
-export function BiasResult({ user_id }) {
+export default function BiasResult({ user_id }) {
   const [results, setResults] = useState(null)
 
   useEffect(() => {
@@ -78,12 +77,10 @@ export function BiasResult({ user_id }) {
         </Typography>
         <Typography variant='subtitle1'>
           You can review the result in{' '}
-          <Link component={RouterLink} to='/'>
-            My Home
+          <Link component={RouterLink} to='/profile'>
+            Home
           </Link>
-          .
         </Typography>
-        <Footer></Footer>
       </Box>
     </Container>
   )

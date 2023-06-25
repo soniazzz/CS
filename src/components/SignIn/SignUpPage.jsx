@@ -1,13 +1,10 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-//import "./SignUpPage.css"
 import { Container, Typography, TextField, Button, Grid, Box, Avatar} from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Footer from '../Footer.jsx'
 
-
-
-export function SignupPage() {
+export default function SignupPage() {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -33,7 +30,6 @@ export function SignupPage() {
       }
     )
     const data = await response.json()
-    console.log(data)
     if (response.ok) {
       if (data.error && data.error === 'Username already exists.') {
         alert('Username already exists. Please choose another one.')
@@ -54,7 +50,7 @@ export function SignupPage() {
           alignItems: 'center',
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+        <Avatar sx={{ m: 1, backgroundColor: 'secondary.main' }}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography variant='h5' align='center' gutterBottom>
@@ -130,5 +126,4 @@ export function SignupPage() {
       </Box>
     </Container>
   )
-
 }

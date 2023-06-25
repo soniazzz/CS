@@ -6,7 +6,7 @@ import TopicList from './TopicList'
 import NewTopicForm from './NewTopicForm'
 import Sidebar from './Sidebar'
 
-export function DiscussionForum (){
+export default function DiscussionForum (){
   const [topics, setTopics] = useState([
     { id: 1, title: 'Example Topic 1' },
     { id: 2, title: 'Example Topic 2' },

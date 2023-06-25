@@ -4,17 +4,12 @@ import {
   Typography,
   TextField,
   Button,
-  Grid,
   Box,
   Avatar,
 } from '@mui/material'
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined'
-import Footer from '../Footer.jsx'
 
-export function ProfileEdit(props) {
-  const user_id = sessionStorage.getItem('session_token')
-  console.log(user_id)
-
+export default function EditProfile(props) {
   const [formData, setFormData] = useState({
     username: '',
     team: '',
@@ -30,7 +25,7 @@ export function ProfileEdit(props) {
     event.preventDefault()
 
     const response = await fetch(
-      `http://127.0.0.1:8000/bias_test/api/edit-profile/${user_id}/`,
+      `http://127.0.0.1:8000/bias_test/api/edit-profile/${props.user_id}/`,
       {
         method: 'POST',
         headers: {
@@ -40,7 +35,6 @@ export function ProfileEdit(props) {
       }
     )
     const data = await response.json()
-    console.log(data)
     if (response.ok) {
       if (data.error && data.error === 'Username already exists.') {
         alert('Username already exists. Please choose another one.')
@@ -62,7 +56,7 @@ export function ProfileEdit(props) {
           alignItems: 'center',
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+        <Avatar sx={{ m: 1, backgroundColor: 'secondary.main' }}>
           <CreateOutlinedIcon />
         </Avatar>
 
@@ -111,7 +105,6 @@ export function ProfileEdit(props) {
               Save
             </Button>
           </Box>
-          <Footer></Footer>
         </Box>
       </Box>
     </Container>

@@ -2,7 +2,7 @@ import React from 'react'
 import LinearProgress from '@mui/material/LinearProgress'
 import Box from '@mui/material/Box'
 
-export function ProgressBar({ currentQuestionIndex, totalQuestions }) {
+export default function ProgressBar({ currentQuestionIndex, totalQuestions }) {
   const progress = (currentQuestionIndex / totalQuestions) * 100
 
   return (

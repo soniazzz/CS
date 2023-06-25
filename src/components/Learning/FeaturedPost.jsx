@@ -8,8 +8,6 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Link from '@mui/material/Link'
 
-
-
 function truncateText(text, maxLength) {
   if (text.length > maxLength) {
     return text.slice(0, maxLength) + '...'
@@ -22,9 +20,9 @@ function FeaturedPost(props) {
   const truncatedBrief = truncateText(post.brief, 100)
 
   return (
-    <Grid item xs={12} md={6}>
-      <CardActionArea component='a' href={post.link}>
-        <Card sx={{ display: 'flex', height: 250 }}>
+    <Grid item xs={6}>
+      <Card sx={{ height: 250 }}>
+        <CardActionArea component='a' href={post.link}>
           <CardContent sx={{ flex: 1 }}>
             <Typography component='h2' variant='h5' textAlign='left'>
               {post.head}
@@ -44,8 +42,8 @@ function FeaturedPost(props) {
             image={post.img}
             alt={post.imageLabel}
           />
-        </Card>
-      </CardActionArea>
+        </CardActionArea>
+      </Card>
     </Grid>
   )
 }

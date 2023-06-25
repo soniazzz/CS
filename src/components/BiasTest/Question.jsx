@@ -1,54 +1,12 @@
-/*import './Question.css'
 import { ChoiceBar } from './ChoiceBar'
-import React, { useContext } from 'react'
-import QuestionContext from './QuestionContext'
-
-export function Question(props) {
-  const { questionData, current_index, saveResponse } = props
-  //const { index, question, description, choices } = questionData
-  const { question, choices, index } = questionData
-  const letterIndex = ['A', 'B', 'C', 'D']
-  const { incrementQuestionNumber } = useContext(QuestionContext)
-  function onChoiceSelect(points) {
-    saveResponse(index, points)
-  }
-
-  return (
-    <div className='questionBox'>
-      <section>
-        <h4>{'Question ' + current_index}</h4>
-        <h5>{question}</h5>
-
-        {choices.map(({ option, points }, i) => (
-          <div>
-            <ChoiceBar
-              question_index={index}
-              choice={letterIndex[i] + '. ' + option}
-              onChoiceSelect={() => onChoiceSelect(points)}
-              incrementQuestionNumber={incrementQuestionNumber}
-            />
-            <br />
-          </div>
-        ))}
-      </section>
-    </div>
-  )
-}*/
-import { ChoiceBar } from './ChoiceBar'
-import React, { useContext } from 'react'
-import QuestionContext from './QuestionContext'
+import React from 'react'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
-export function Question(props) {
-  const { questionData, current_index, saveResponse } = props
+export default function Question(props) {
+  const { questionData, current_index } = props
   const { question, choices, index } = questionData
   const letterIndex = ['A', 'B', 'C', 'D']
-  const { incrementQuestionNumber } = useContext(QuestionContext)
-
-  function onChoiceSelect(points) {
-    saveResponse(index, points)
-  }
 
   return (
     <Box className='questionBox'>
@@ -61,17 +19,9 @@ export function Question(props) {
           {question}
         </Typography>
 
-
-
-
         {choices.map(({ option, points }, i) => (
           <div key={i}>
-            <ChoiceBar
-              question_index={index}
-              choice={letterIndex[i] + '. ' + option}
-              onChoiceSelect={() => onChoiceSelect(points)}
-              incrementQuestionNumber={incrementQuestionNumber}
-            />
+            <ChoiceBar bias_index={index} choice={letterIndex[i] + '. ' + option} points={points}/>
             <br />
           </div>
         ))}

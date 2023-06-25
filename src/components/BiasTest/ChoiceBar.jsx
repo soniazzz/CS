@@ -4,12 +4,12 @@ import Container from '@mui/material/Container'
 import QuestionContext from './QuestionContext'
 
 export function ChoiceBar(props) {
-  const { question_index, choice, onChoiceSelect } = props
-  const { incrementQuestionNumber } = useContext(QuestionContext)
+  const { bias_index, choice, points } = props
+  const { incrementQuestionNumber, saveResponse } = useContext(QuestionContext)
 
   const onclick = () => {
-    incrementQuestionNumber()
-    onChoiceSelect()
+    incrementQuestionNumber(bias_index, points)
+    saveResponse(bias_index, points)
   }
 
   return (
@@ -26,24 +26,3 @@ export function ChoiceBar(props) {
     </Container>
   )
 }
-/*import './ChoiceBar.css'
-import React, { useContext } from 'react'
-import QuestionContext from './QuestionContext'
-
-export function ChoiceBar(props) {
-  const { question_index, choice, onChoiceSelect} = props
-  const { incrementQuestionNumber } = useContext(QuestionContext)
-
-  const onclick = () => {
-    incrementQuestionNumber()
-    onChoiceSelect()
-    
-  }
-
-  return (
-    <div className='choiceBar'>
-      <button onClick={onclick}>{choice}</button>
-    </div>
-  )
-}
-*/

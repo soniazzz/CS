@@ -13,22 +13,23 @@ import {
   Box,
 } from '@mui/material'
 
-export default function MainProfile(props) {
-  const user_id = props.user_id
-  const navigate = useNavigate()
+export default function MainProfile() {
+  const user_id = sessionStorage.getItem('session_token')    
   const [results, setResults] = useState(null)
   const [info, setInfo] = useState(null)
   const [articles, setArticles] = useState(null)
 
   async function fetchResults() {
       try {
-          const id = user_id === null ? 0 : user_id
-          const response = await fetch(`http://127.0.0.1:8000/bias_test/api/get-profile/${id}`, {method: 'GET'})
-          if (response.status === 403) navigate('/login')
-          const data = await response.json()
-          setResults(data.data)
-          setInfo(data.info)
-          setArticles(data.articles_list)
+        if (user_id) {
+          const response = await fetch(`http://127.0.0.1:8000/bias_test/api/get-profile/${user_id}`, {method: 'GET'})
+          if (response.status === 200) {
+            const data = await response.json()
+            setResults(data.data)
+            setInfo(data.info)
+            setArticles(data.articles_list)
+          }
+        }
       } catch (error) {
           console.error('Error fetching bias results:', error)
       }
@@ -36,7 +37,7 @@ export default function MainProfile(props) {
 
   useEffect(() => {
       fetchResults()
-  }, [user_id])
+  }, [])
 
   if (!results || !info||!articles) {
       return <div>Loading...</div>

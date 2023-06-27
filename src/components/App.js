@@ -1,5 +1,5 @@
 import './App.css'
-import { React } from 'react'
+import { React, useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { BrowserRouter } from 'react-router-dom'
 import BiasTest from './BiasTest/BiasTest'
@@ -14,16 +14,14 @@ import DiscussionForum from './DiscussionForum/DiscussionForum'
 import AppContainer from './AppContainer'
 
 export default function App() {
-    const user_id = sessionStorage.getItem('session_token')
-
     return (
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<AppContainer />} >
-                    <Route path='profile' element={<MainProfile user_id={user_id} />} />
-                    <Route path='edit-profile' element={<EditProfile user_id={user_id} />} />
-                    <Route path='bias-test' element={<BiasTest user_id={user_id} />} />
-                    <Route path='bias-results' element={<BiasResult user_id={user_id} />} />
+                    <Route path='profile' element={<MainProfile />} />
+                    <Route path='edit-profile' element={<EditProfile />} />
+                    <Route path='bias-test' element={<BiasTest />} />
+                    <Route path='bias-results' element={<BiasResult />} />
                     <Route path='learning' element={<LearningIntro />} />
                     <Route path='gender-bias' element={<LearningArticle bias_index={1} />} />
                     <Route path='racial-bias' element={<LearningArticle bias_index={2} />} />
@@ -32,8 +30,8 @@ export default function App() {
                     <Route path='affinity-bias' element={<LearningArticle bias_index={5} />} />
                     <Route path='discussion-forum' element={<DiscussionForum />} />
                 </Route>
-                <Route path='/login' element={<LoginPage />} />
-                <Route path='/signup' element={<SignupPage />} />
+                <Route path='login' element={<LoginPage />} />
+                <Route path='signup' element={<SignupPage />} />
             </Routes>
         </BrowserRouter>
     )

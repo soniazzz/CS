@@ -7,9 +7,10 @@ import { Container, Grid } from '@mui/material'
 export default function LearningIntro() {
   const [articles, setArticles] = useState([])
   const [recommend, setRecommend] = useState([])
+  const user_id = sessionStorage.getItem('session_token')
 
   useEffect(() => {
-    fetchArticles()
+    if (user_id) fetchArticles()
   }, [])
 
   async function fetchArticles() {
@@ -20,10 +21,11 @@ export default function LearningIntro() {
           method: 'GET',
         }
       )
-      const data = await response.json()
-      
-      setArticles(data.article)
-      setRecommend(data.recommend)
+      if (response.status === 200) {
+        const data = await response.json()
+        setArticles(data.article)
+        setRecommend(data.recommend) 
+      }
     } catch (error) {
       console.error('Error fetching articles:', error)
     }

@@ -6,15 +6,16 @@ import QuestionContext from './QuestionContext'
 import { Container, Avatar, IconButton, Box } from '@mui/material'
 import { QuizOutlined, ArrowBack } from '@mui/icons-material'
 
-export default function BiasTest({ user_id }) {
+export default function BiasTest() {
   const [questions, setQuestions] = useState([])
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [responses, setResponses] = useState({})
   const [isSubmitted, setIsSubmitted] = useState(false)
   const navigate = useNavigate()
+  const user_id = sessionStorage.getItem('session_token')
 
   useEffect(() => {
-    fetchQuestions()
+    if(user_id) fetchQuestions()
   }, [])
 
   useEffect(() => {

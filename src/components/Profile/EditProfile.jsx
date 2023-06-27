@@ -9,7 +9,8 @@ import {
 } from '@mui/material'
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined'
 
-export default function EditProfile(props) {
+export default function EditProfile() {
+  const user_id = sessionStorage.getItem('session_token')
   const [formData, setFormData] = useState({
     username: '',
     team: '',
@@ -25,7 +26,7 @@ export default function EditProfile(props) {
     event.preventDefault()
 
     const response = await fetch(
-      `http://127.0.0.1:8000/bias_test/api/edit-profile/${props.user_id}/`,
+      `http://127.0.0.1:8000/bias_test/api/edit-profile/${user_id}/`,
       {
         method: 'POST',
         headers: {

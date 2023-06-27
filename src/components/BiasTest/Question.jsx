@@ -11,17 +11,31 @@ export default function Question(props) {
   return (
     <Box className='questionBox'>
       <section>
-        <Typography variant='h4' sx={{ mt: 3 }} fontWeight='bolder'>
+        <Typography
+          variant='h4'
+          sx={{ mt: 3 }}
+          fontWeight='bolder'
+          textAlign='center'
+        >
           {'Question ' + current_index}
         </Typography>
 
-        <Typography variant='h5' sx={{ mt: 4, mb: 3 }} fontWeight='bold'>
+        <Typography
+          variant='h5'
+          sx={{ mt: 4, mb: 3 }}
+          fontWeight='bold'
+          textAlign='center'
+        >
           {question}
         </Typography>
 
         {choices.map(({ option, points }, i) => (
           <div key={i}>
-            <ChoiceBar bias_index={index} choice={letterIndex[i] + '. ' + option} points={points}/>
+            <ChoiceBar
+              bias_index={index}
+              choice={letterIndex[i] + '. ' + option}
+              points={points}
+            />
             <br />
           </div>
         ))}

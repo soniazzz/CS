@@ -14,6 +14,7 @@ export default function LearningArticle(props) {
   const [recommend, setRecommend] = useState([])
   const [page, setPage] = useState(1)
   const [maxPages, setMaxPages] = useState(0)
+  const user_id = sessionStorage.getItem('session_token')
 
   useEffect(() => {
     setPage(1)
@@ -25,22 +26,27 @@ export default function LearningArticle(props) {
   }, [page])
 
   async function fetchArticles() {
-    try {
-      const response = await fetch(`http://127.0.0.1:8000/bias_test/api/get-articles_of_type/${bias_index}/${page}`, {method: 'GET'})
-      const data = await response.json()
-      setArticles(data.article)
-      setRecommend(data.recommend)
-      const totalPages = Math.ceil(data.total / 6)
-      setMaxPages(totalPages)
-    } catch (error) {
-      console.error('Error fetching articles:', error)
+    if (user_id) {
+      try {
+        const response = await fetch(
+          `http://127.0.0.1:8000/bias_test/api/get-articles_of_type/${bias_index}/${page}`,
+          { method: 'GET' }
+        )
+        const data = await response.json()
+        setArticles(data.article)
+        setRecommend(data.recommend)
+        const totalPages = Math.ceil(data.total / 6)
+        setMaxPages(totalPages)
+      } catch (error) {
+        console.error('Error fetching articles:', error)
+      }
     }
   }
 
   function handlePageChange(event, value) {
     setPage(value)
   }
-  
+
   const mainFeaturedPost = {
     title: recommend.head,
     description: '',
@@ -51,26 +57,26 @@ export default function LearningArticle(props) {
   }
 
   return (
-      <Container>
-          <MainFeaturedPost post={mainFeaturedPost} />
-          <LearningNav />
-          <Grid container spacing={3} mt={2}>
-            {articles.map((post) => (
-              <FeaturedPost key={post.head} post={post} />
-            ))}
-          </Grid>
-          <br></br>
-          <Box display='flex' justifyContent='center' marginTop={4}>
-            <Pagination
-              count={maxPages}
-              page={page}
-              onChange={handlePageChange}
-              color='primary'
-              size='large'
-              showFirstButton
-              showLastButton
-            />
-          </Box>
-      </Container>
+    <Container>
+      <MainFeaturedPost post={mainFeaturedPost} />
+      <LearningNav />
+      <Grid container spacing={3} mt={2}>
+        {articles.map((post) => (
+          <FeaturedPost key={post.head} post={post} />
+        ))}
+      </Grid>
+      <br></br>
+      <Box display='flex' justifyContent='center' marginTop={4}>
+        <Pagination
+          count={maxPages}
+          page={page}
+          onChange={handlePageChange}
+          color='primary'
+          size='large'
+          showFirstButton
+          showLastButton
+        />
+      </Box>
+    </Container>
   )
 }

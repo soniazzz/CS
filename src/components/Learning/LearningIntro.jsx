@@ -7,9 +7,10 @@ import { Container, Grid } from '@mui/material'
 export default function LearningIntro() {
   const [articles, setArticles] = useState([])
   const [recommend, setRecommend] = useState([])
+  const user_id = sessionStorage.getItem('session_token')
 
   useEffect(() => {
-    fetchArticles()
+    if (user_id) fetchArticles()
   }, [])
 
   async function fetchArticles() {
@@ -20,10 +21,11 @@ export default function LearningIntro() {
           method: 'GET',
         }
       )
-      const data = await response.json()
-      
-      setArticles(data.article)
-      setRecommend(data.recommend)
+      if (response.status === 200) {
+        const data = await response.json()
+        setArticles(data.article)
+        setRecommend(data.recommend)
+      }
     } catch (error) {
       console.error('Error fetching articles:', error)
     }
@@ -35,7 +37,7 @@ export default function LearningIntro() {
     image: recommend.img,
     imageText: 'main image description',
     linkText: 'Continue reading…',
-    link:recommend.link
+    link: recommend.link,
   }
 
   return (
@@ -43,17 +45,16 @@ export default function LearningIntro() {
       <MainFeaturedPost post={mainFeaturedPost} />
       <LearningNav />
       <Grid container spacing={3} mt={2}>
-        {articles.map(article => (
-            <LearningIntroArticle
-              key={article.link}
-              head={article.head}
-              brief={article.brief}
-              img={article.img}
-              link={article.link}
-            />
+        {articles.map((article) => (
+          <LearningIntroArticle
+            key={article.link}
+            head={article.head}
+            brief={article.brief}
+            img={article.img}
+            link={article.link}
+          />
         ))}
       </Grid>
     </Container>
   )
-
 }

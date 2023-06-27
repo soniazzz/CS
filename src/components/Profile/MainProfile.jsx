@@ -13,33 +13,37 @@ import {
   Box,
 } from '@mui/material'
 
-export default function MainProfile(props) {
-  const user_id = props.user_id
-  const navigate = useNavigate()
+export default function MainProfile() {
+  const user_id = sessionStorage.getItem('session_token')
   const [results, setResults] = useState(null)
   const [info, setInfo] = useState(null)
   const [articles, setArticles] = useState(null)
 
   async function fetchResults() {
-      try {
-          const id = user_id === null ? 0 : user_id
-          const response = await fetch(`http://127.0.0.1:8000/bias_test/api/get-profile/${id}`, {method: 'GET'})
-          if (response.status === 403) navigate('/login')
+    try {
+      if (user_id) {
+        const response = await fetch(
+          `http://127.0.0.1:8000/bias_test/api/get-profile/${user_id}`,
+          { method: 'GET' }
+        )
+        if (response.status === 200) {
           const data = await response.json()
           setResults(data.data)
           setInfo(data.info)
           setArticles(data.articles_list)
-      } catch (error) {
-          console.error('Error fetching bias results:', error)
+        }
       }
+    } catch (error) {
+      console.error('Error fetching bias results:', error)
+    }
   }
 
   useEffect(() => {
-      fetchResults()
-  }, [user_id])
+    fetchResults()
+  }, [])
 
-  if (!results || !info||!articles) {
-      return <div>Loading...</div>
+  if (!results || !info || !articles) {
+    return <div>Loading...</div>
   }
 
   return (
@@ -48,7 +52,7 @@ export default function MainProfile(props) {
         <Grid container spacing={4}>
           <Grid item xs={12} md={12}>
             <Card sx={{ display: 'flex', height: 350 }}>
-              <Grid item xs={12} md={4}>
+              <Grid item xs={12} md={4} mt={4}>
                 <Grid container justifyContent='center'>
                   <img
                     src={info.avatar}
@@ -56,6 +60,7 @@ export default function MainProfile(props) {
                     className='rounded-circle'
                     width={220}
                     height={220}
+                    style={{ borderRadius: '50%' }}
                   />
                 </Grid>
                 <Box mt={3} textAlign='center'>
@@ -63,7 +68,7 @@ export default function MainProfile(props) {
                 </Box>
               </Grid>
               <Grid item xs={12} md={8}>
-                <Grid container alignItems='center' spacing={2}>
+                <Grid container alignItems='center' spacing={2} mt={4}>
                   <Grid item xs={3}>
                     <Typography>Name</Typography>
                   </Grid>
@@ -97,7 +102,13 @@ export default function MainProfile(props) {
                     <hr />
                   </Grid>
 
-                  <Grid item xs={12}>
+                  <Grid
+                    container
+                    item
+                    xs={12}
+                    justifyContent='center'
+                    alignItems='center'
+                  >
                     <Button
                       component={RouterLink}
                       to='/edit-profile'
@@ -119,6 +130,9 @@ export default function MainProfile(props) {
                   <Card sx={{ height: 350 }}>
                     <CardContent>
                       <Typography variant='h6'>Bias Possibility</Typography>
+                      <Grid item xs={12}>
+                        <hr />
+                      </Grid>
                       <Box mt={2}>
                         {Object.entries(results).map(
                           ([bias, possibility], index) => (
@@ -144,6 +158,9 @@ export default function MainProfile(props) {
                       <Typography variant='h6'>
                         Recommended Learning Materials
                       </Typography>
+                      <Grid item xs={12}>
+                        <hr />
+                      </Grid>
                       <Box mt={2} textAlign='left'>
                         {articles.map((article) => (
                           <Box key={article.link} mb={2}>

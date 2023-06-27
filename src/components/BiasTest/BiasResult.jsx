@@ -13,8 +13,9 @@ import {
   Link,
 } from '@mui/material'
 
-export default function BiasResult({ user_id }) {
+export default function BiasResult() {
   const [results, setResults] = useState(null)
+  const user_id = sessionStorage.getItem('session_token')
 
   useEffect(() => {
     async function fetchResults() {
@@ -85,4 +86,3 @@ export default function BiasResult({ user_id }) {
     </Container>
   )
 }
-

@@ -1,12 +1,35 @@
 import { PersonalInfo } from './PersonalInfo'
 import { Container, Grid } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { HotPost } from './HotPost'
 import { Card, CardContent, Typography, Button, Box } from '@mui/material'
 
 export default function DiscussionForum() {
   const user_id = sessionStorage.getItem('session_token')
+  const [allPosts, setAllPosts] = useState([])
+  const biasIndex = 6
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch(
+          `http://127.0.0.1:8000/bias_test/api/posts/${biasIndex}/`
+        )
+        const data = await response.json()
+        setAllPosts(
+          data.posts.map((post) => ({
+            ...post,
+            postDate: new Date(post.postDate),
+          }))
+        )
+      } catch (err) {
+        console.error('Error fetching posts:', err)
+      }
+    }
+
+    fetchPosts()
+  }, [biasIndex])
   return (
     <Container>
       <Box mt={4}>
@@ -28,20 +51,18 @@ export default function DiscussionForum() {
                     'Affinity',
                   ].map((bias, index) => (
                     <Grid key={index} item xs={6} sm={4}>
-                      
-                        <Button
-                          component={RouterLink}
-                          to={`/discussion_forum/${bias}_Bias`}
-                          variant='contained'
-                          color='primary'
-                          sx={{
-                            height: '50px',
-                            width: '100%',
-                          }}
-                        >
-                          {bias} Bias Posts
-                        </Button>
-                    
+                      <Button
+                        component={RouterLink}
+                        to={`/discussion_forum/${bias}_Bias`}
+                        variant='contained'
+                        color='primary'
+                        sx={{
+                          height: '50px',
+                          width: '100%',
+                        }}
+                      >
+                        {bias} Bias Posts
+                      </Button>
                     </Grid>
                   ))}
                 </Grid>
@@ -63,13 +84,14 @@ export default function DiscussionForum() {
                         }}
                       />
 
-                      {Array.from({ length: 4 }, (_, index) => (
+                      {allPosts.map((post, index) => (
                         <HotPost
-                          key={index}
-                          title={`Post Title ${index + 1}`}
-                          poster={`User ${index + 1}`}
-                          postDate={new Date()}
-                          numberOfReplies={index * 10}
+                          post_index={post.post_index}
+                          title={post.title}
+                          poster={post.poster}
+                          postDate={post.postDate}
+                          numberOfReplies={post.numberOfReplies}
+                          bias_index={post.bias_index}
                         />
                       ))}
                     </CardContent>

@@ -2,9 +2,29 @@ import React from 'react'
 import { Box, Typography, Chip, Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
-export function PostDetail({ title, poster, postDate, numberOfReplies }) {
-  const navigate = useNavigate()
+export function PostDetail(props) {
+  const{
+  title,
+  poster,
+  postDate,
+  numberOfReplies,
+  biasIndex,
+} =props
 
+  console.log('here is the poster'+poster)
+  const navigate = useNavigate()
+  let bias_type = ''
+  if (biasIndex === 1) {
+    bias_type = 'Gender Bias'
+  } else if (biasIndex === 2) {
+    bias_type = 'Racial Bias'
+  } else if (biasIndex === 3) {
+    bias_type = 'Age Bias'
+  } else if (biasIndex === 4) {
+    bias_type = 'Height Bias'
+  } else if (biasIndex === 5) {
+    bias_type = 'Affinity Bias'
+  }
 
   return (
     <Box>
@@ -17,10 +37,7 @@ export function PostDetail({ title, poster, postDate, numberOfReplies }) {
         </Typography>
         <Box>
           <Typography variant='h7' textAlign='right'>
-            Posted by: {poster + ' '}
-          </Typography>
-          <Typography variant='h7' textAlign='right'>
-            {postDate.toLocaleDateString()}
+            Posted by {poster + ' '}
           </Typography>
         </Box>
       </Box>

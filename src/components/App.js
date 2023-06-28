@@ -46,29 +46,32 @@ export default function App() {
           />
           <Route path='discussion-forum' element={<DiscussionForum />} />
           <Route
-            path='/discussion_forum/post'
-            element={<PostWrapper post_index={post_index} />}
+            path='/discussion_forum/post/:post_index'
+            element={<PostWrapper />}
           />
           <Route
             path='/discussion_forum/General_Bias'
-            element={<PostOfType />}
+            element={<PostOfType bias_index={0} />}
           />
           <Route
             path='/discussion_forum/Gender_Bias'
-            element={<PostOfType />}
+            element={<PostOfType bias_index={1} />}
           />
-          <Route path='/discussion_forum/Age_Bias' element={<PostOfType />} />
+          <Route
+            path='/discussion_forum/Age_Bias'
+            element={<PostOfType bias_index={3} />}
+          />
           <Route
             path='/discussion_forum/Racial_Bias'
-            element={<PostOfType />}
+            element={<PostOfType bias_index={2} />}
           />
           <Route
             path='/discussion_forum/Affinity_Bias'
-            element={<PostOfType />}
+            element={<PostOfType bias_index={5} />}
           />
           <Route
             path='/discussion_forum/Height_Bias'
-            element={<PostOfType />}
+            element={<PostOfType bias_index={4} />}
           />
         </Route>
         <Route path='login' element={<LoginPage />} />

@@ -10,14 +10,14 @@ import {
 import { HotPost } from './MainForum/HotPost'
 import Pagination from '@mui/material/Pagination'
 
-export default function PostOfType() {
+export default function PostOfType(props) {
   const [page, setPage] = useState(1)
   const [allPosts, setAllPosts] = useState([])
-  const [biasIndex] = useState(1) 
+  const biasIndex = props.bias_index 
   const handleChange = (event, value) => {
     setPage(value)
   }
-  const postsPerPage = 1 
+  const postsPerPage = 5
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -26,7 +26,12 @@ export default function PostOfType() {
           `http://127.0.0.1:8000/bias_test/api/posts/${biasIndex}/`
         )
         const data = await response.json()
-        setAllPosts(data.posts)
+        setAllPosts(
+          data.posts.map((post) => ({
+            ...post,
+            postDate: new Date(post.postDate),
+          }))
+        )
       } catch (err) {
         console.error('Error fetching posts:', err)
       }
@@ -36,18 +41,6 @@ export default function PostOfType() {
   }, [page, biasIndex])
   console.log(allPosts)
 
-  /*Fake Data
-  const [page, setPage] = React.useState(1)
-  const handleChange = (event, value) => {
-    setPage(value)
-  }
-  const postsPerPage = 8
-  const allPosts = Array.from({ length: 100 }, (_, index) => ({
-    title: `Post Title ${index + 1}`,
-    poster: `User ${index + 1}`,
-    postDate: new Date(),
-    numberOfReplies: index * 10,
-  }))*/
 
   const displayedPosts = allPosts.slice(
     (page - 1) * postsPerPage,
@@ -60,7 +53,7 @@ export default function PostOfType() {
         <Grid container spacing={4}>
           <Grid item xs={12} sm={12}>
             <Typography variant='h6' textAlign='left'>
-              Hot Posts
+              All Posts
             </Typography>
             <hr
               style={{
@@ -74,10 +67,12 @@ export default function PostOfType() {
                 <Card>
                   <CardContent>
                     <HotPost
+                      post_index={post.post_index}
                       title={post.title}
                       poster={post.poster}
                       postDate={post.postDate}
                       numberOfReplies={post.numberOfReplies}
+                      bias_index={post.bias_index}
                     />
                   </CardContent>
                 </Card>

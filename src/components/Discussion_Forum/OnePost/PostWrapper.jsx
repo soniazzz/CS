@@ -1,9 +1,10 @@
 import React from 'react'
+import { useParams } from 'react-router-dom'
 import { Post } from './Post'
 import { Box, Container } from '@mui/material'
 
 export default function PostWrapper(props) {
-  const post_index = props.post_index
+  const { post_index } = useParams()
   return (
     <Container>
       <Box mt={4}>

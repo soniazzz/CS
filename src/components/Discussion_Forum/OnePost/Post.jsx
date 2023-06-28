@@ -1,10 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Typography, Grid, Card, CardContent } from '@mui/material'
 import { PostDetail } from './PostDetail'
 import { Reply } from './Reply'
 
 export function Post(props) {
   const post_index = props.post_index
+  const [post, setPost] = useState({})
+  console.log('the post index is'+post_index)
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch(
+          `http://127.0.0.1:8000/bias_test/api/one_post/${post_index}/`
+        )
+        const data = await response.json()
+        setPost({
+          ...data,
+          postDate: new Date(data.postDate)
+          
+        })
+      } catch (err) {
+        console.error('Error fetching posts:', err)
+      }
+    }
+
+    fetchPosts()
+  }, [post_index])
+
+  /*
   const post = {
     title: `Post Title ${post_index + 1}`,
     poster: `User ${post_index + 1}`,
@@ -12,7 +36,7 @@ export function Post(props) {
     numberOfReplies: post_index * 10,
     details:
       'hahahahahahshsujdfgujbxhjcgaskcbzshjcbsjhfbsdjhcbxjhcsdjhcgsducbsdjucsdjkucbdsujcgdyucbsdcjkhsdgcsdujkcbdjkbdjkvcj bxjkvdcjkvdfkvbdjvsdjuvbfmvbndfjknvxcjm,vbnkcx,vhduigdsvbdjbjhcvsjcbhjcskjcvsdkvbasjcshdgjcvsjdu\nshAIOHNAJKSDHASKJSJHCBSHSDGFKJASFGSDUIFSDUJFSDKUIFSD HSDFOLJGFDKLGHDFKL HFSDKIFHSDKJFHSDIKhvdfkighdklfhdsjkhsduklfhsdujkfgdiufe\nhiwesfhedjsbfdajkbsdjhfbsdjfbsdjmfbsdkfhsdifhadmfnvsidukfhndfjkjvghndfkj',
-  }
+  }*/
 
   const replies = [
     {
@@ -114,6 +138,7 @@ export function Post(props) {
               poster={post.poster}
               postDate={post.postDate}
               numberOfReplies={post.numberOfReplies}
+              biasIndex={post.bias_index}
             />
           </Box>
           <Typography variant='h6' textAlign='left'>

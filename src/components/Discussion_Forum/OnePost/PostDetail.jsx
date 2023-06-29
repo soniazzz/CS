@@ -37,7 +37,7 @@ export function PostDetail(props) {
         </Typography>
         <Box>
           <Typography variant='h7' textAlign='right'>
-            Posted by {poster + ' '}
+            Posted by {poster + ' '} 
           </Typography>
         </Box>
       </Box>

@@ -6,7 +6,8 @@ import { Reply } from './Reply'
 export function Post(props) {
   const post_index = props.post_index
   const [post, setPost] = useState({})
-  console.log('the post index is'+post_index)
+  const [replies, setReply] = useState([])
+  console.log('the post index is' + post_index)
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -16,10 +17,16 @@ export function Post(props) {
         )
         const data = await response.json()
         setPost({
-          ...data,
-          postDate: new Date(data.postDate)
-          
+          ...data.post,
+          postDate: new Date(data.post.postDate),
         })
+        setReply(
+          data.replies.map((reply) => ({
+            ...reply,
+            postDate: new Date(reply.postDate),
+          })
+          )
+        )
       } catch (err) {
         console.error('Error fetching posts:', err)
       }
@@ -37,7 +44,7 @@ export function Post(props) {
     details:
       'hahahahahahshsujdfgujbxhjcgaskcbzshjcbsjhfbsdjhcbxjhcsdjhcgsducbsdjucsdjkucbdsujcgdyucbsdcjkhsdgcsdujkcbdjkbdjkvcj bxjkvdcjkvdfkvbdjvsdjuvbfmvbndfjknvxcjm,vbnkcx,vhduigdsvbdjbjhcvsjcbhjcskjcvsdkvbasjcshdgjcvsjdu\nshAIOHNAJKSDHASKJSJHCBSHSDGFKJASFGSDUIFSDUJFSDKUIFSD HSDFOLJGFDKLGHDFKL HFSDKIFHSDKJFHSDIKhvdfkighdklfhdsjkhsduklfhsdujkfgdiufe\nhiwesfhedjsbfdajkbsdjhfbsdjfbsdjmfbsdkfhsdifhadmfnvsidukfhndfjkjvghndfkj',
   }*/
-
+  /*
   const replies = [
     {
       id: 1,
@@ -114,7 +121,7 @@ export function Post(props) {
         'This is the fourth reply. When people first started browsing the web for information, the experience was “on rails.” Customization was more of an afterthought, and there was not much content to peruse. Even so, discussion forums were an instant hit among early pioneers of the Internet.',
       replies: [],
     },
-  ]
+  ]*/
 
   const renderReplies = (replies, isReply = false) => {
     return replies.map((reply) => (

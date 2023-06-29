@@ -31,6 +31,7 @@ export default function MainProfile() {
           setResults(data.data)
           setInfo(data.info)
           setArticles(data.articles_list)
+          
         }
       }
     } catch (error) {

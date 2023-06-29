@@ -26,9 +26,13 @@ export function Reply({ reply, isReply = false }){
           </ReplyTitle>
           <Box mt={1} display='flex' justifyContent='space-between'>
             <Box>
-              <Typography variant='body2'>
+              {/**<Typography variant='body2'>
                 Replied by {reply.poster + ' '} on{' '}
                 {reply.postDate.toLocaleDateString()}
+  </Typography>**/}
+              <Typography variant='body2'>
+                Replied by {reply.poster + ' '} on{' '}
+                {reply.postDate.toLocaleString()}
               </Typography>
             </Box>
             <Button variant='outlined' size='small'>

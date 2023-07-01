@@ -11,6 +11,7 @@ import MainProfile from './Profile/MainProfile'
 import LearningIntro from './Learning/LearningIntro'
 import LearningArticle from './Learning/LearningArticle'
 import DiscussionForum from './Discussion_Forum/MainForum/DiscussionForum'
+import NewPost from './Discussion_Forum/MainForum/NewPost'
 import AppContainer from './AppContainer'
 import PostWrapper from './Discussion_Forum/OnePost/PostWrapper'
 import PostOfType from './Discussion_Forum/PostOfType'
@@ -72,6 +73,10 @@ export default function App() {
           <Route
             path='/discussion_forum/Height_Bias'
             element={<PostOfType bias_index={4} />}
+          />
+          <Route
+            path='/discussion_forum/new_post'
+            element={<NewPost />}
           />
         </Route>
         <Route path='login' element={<LoginPage />} />

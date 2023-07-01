@@ -6,6 +6,7 @@ import Card from '@mui/material/Card'
 import CardActionArea from '@mui/material/CardActionArea'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
+import Box from '@mui/material/Box'
 import Link from '@mui/material/Link'
 
 function truncateText(text, maxLength) {
@@ -22,27 +23,29 @@ function FeaturedPost(props) {
   return (
     <Grid item xs={6}>
       <Card sx={{ height: 250 }}>
-        <CardActionArea component='a' href={post.link}>
-          <CardContent sx={{ flex: 1 }}>
-            <Typography component='h2' variant='h5' textAlign='left'>
-              {post.head}
-            </Typography>
-            <Typography variant='subtitle1' paragraph textAlign='left'>
-              {truncatedBrief}
-            </Typography>
-            <Typography variant='subtitle1' color='primary' textAlign='right'>
-              <Link variant='subtitle1' href={post.link} textAlign='right'>
-                Continue reading...
-              </Link>
-            </Typography>
-          </CardContent>
+        <Box display='flex'>
           <CardMedia
             component='img'
-            sx={{ width: 160, display: { xs: 'none', sm: 'block' } }}
+            sx={{ width: 160, height: 250,  display: { xs: 'none', sm: 'block' } }}
             image={post.img}
             alt={post.imageLabel}
           />
-        </CardActionArea>
+          <CardActionArea component='a' href={post.link}>
+            <CardContent sx={{ flex: 1 }}>
+              <Typography component='h2' variant='h5' textAlign='left'>
+                {post.head}
+              </Typography>
+              <Typography variant='subtitle1' paragraph textAlign='left'>
+                {truncatedBrief}
+              </Typography>
+              <Typography variant='subtitle1' color='primary' textAlign='right'>
+                <Link variant='subtitle1' href={post.link} textAlign='right'>
+                  Continue reading...
+                </Link>
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Box>
       </Card>
     </Grid>
   )

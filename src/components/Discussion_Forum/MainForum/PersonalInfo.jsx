@@ -1,6 +1,5 @@
 import { Grid } from '@mui/material'
-
-
+import { Link as RouterLink } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -90,7 +89,12 @@ console.log('here the user_id is'+user_id)
           </Box>
 
           <Box mt={5} display='flex' justifyContent='center'>
-            <Button variant='contained' color='primary'>
+            <Button
+              component={RouterLink}
+              to='/discussion_forum/new_post'
+              variant='contained'
+              color='primary'
+            >
               Add New Post
             </Button>
           </Box>

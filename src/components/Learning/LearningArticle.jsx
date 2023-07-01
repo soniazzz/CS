@@ -55,7 +55,7 @@ export default function LearningArticle(props) {
     linkText: 'Continue reading…',
     link: recommend.link,
   }
-
+  console.log(articles)
   return (
     <Container>
       <MainFeaturedPost post={mainFeaturedPost} />

@@ -1,16 +1,19 @@
-import React, { useState } from 'react'
-import {
-  Container,
-  Typography,
-  TextField,
-  Button,
-  Box,
-  Avatar,
-} from '@mui/material'
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined'
+import {
+  Avatar,
+  Box,
+  Button,
+  Container,
+  TextField,
+  Typography,
+} from '@mui/material'
+import React, { useState } from 'react'
+import { useAuth } from '../AuthProvider'
+import { useNavigate } from 'react-router-dom'
 
 export default function EditProfile() {
-  const user_id = sessionStorage.getItem('session_token')
+  const { userID } = useAuth()
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     username: '',
     team: '',
@@ -26,7 +29,7 @@ export default function EditProfile() {
     event.preventDefault()
 
     const response = await fetch(
-      `http://127.0.0.1:8000/bias_test/api/edit-profile/${user_id}/`,
+      `http://127.0.0.1:8000/bias_test/api/edit-profile/${userID}/`,
       {
         method: 'POST',
         headers: {
@@ -40,7 +43,7 @@ export default function EditProfile() {
       if (data.error && data.error === 'Username already exists.') {
         alert('Username already exists. Please choose another one.')
       } else {
-        window.location.href = '/'
+        navigate('/profile')
       }
     } else {
       alert('Error. Please try again.')

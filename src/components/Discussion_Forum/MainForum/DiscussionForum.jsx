@@ -1,12 +1,12 @@
-import { PersonalInfo } from './PersonalInfo'
-import { Container, Grid } from '@mui/material'
+import { Box, Button, Card, CardContent, Container, Grid, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
+import { useAuth } from '../../AuthProvider'
 import { HotPost } from './HotPost'
-import { Card, CardContent, Typography, Button, Box } from '@mui/material'
+import { PersonalInfo } from './PersonalInfo'
 
 export default function DiscussionForum() {
-  const user_id = sessionStorage.getItem('session_token')
+  const { userID } = useAuth()
   const [allPosts, setAllPosts] = useState([])
   const biasIndex = 6
 
@@ -35,7 +35,7 @@ export default function DiscussionForum() {
       <Box mt={4}>
         <Grid container spacing={4}>
           {/* Left Card - User Information */}
-          <PersonalInfo user_id={user_id}></PersonalInfo>
+          <PersonalInfo user_id={userID}></PersonalInfo>
           {/* Right Cards */}
           <Grid item xs={12} md={8}>
             {/* Upper Card - Navigation */}

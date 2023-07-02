@@ -1,26 +1,27 @@
-import { useState, useEffect } from 'react'
+import { ArrowBack, QuizOutlined } from '@mui/icons-material'
+import { Avatar, Box, Container, IconButton } from '@mui/material'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Question from './Question'
+import { useAuth } from '../AuthProvider'
 import ProgressBar from './ProgressBar'
+import Question from './Question'
 import QuestionContext from './QuestionContext'
-import { Container, Avatar, IconButton, Box } from '@mui/material'
-import { QuizOutlined, ArrowBack } from '@mui/icons-material'
 
 export default function BiasTest() {
   const [questions, setQuestions] = useState([])
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [responses, setResponses] = useState({})
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const { userID } = useAuth()
   const navigate = useNavigate()
-  const user_id = sessionStorage.getItem('session_token')
 
   useEffect(() => {
-    if (user_id) fetchQuestions()
+    if (userID) fetchQuestions()
   }, [])
 
   useEffect(() => {
     if (isSubmitted) {
-      handleSubmit(responses, user_id).then(() => {
+      handleSubmit(responses, userID).then(() => {
         navigate('/bias-results')
       })
     }
@@ -72,7 +73,7 @@ export default function BiasTest() {
     return null
   }
 
-  async function handleSubmit(responses, user_id) {
+  async function handleSubmit(responses, userID) {
     console.log('responses: ' + JSON.stringify(responses))
 
     const aggregated_bias_points = Object.fromEntries(
@@ -92,11 +93,10 @@ export default function BiasTest() {
         header: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           responses: aggregated_bias_points,
-          user_id: user_id,
+          user_id: userID,
         }),
       }
     )
-    const json = await response.json()
     console.log('responses sent')
   }
 

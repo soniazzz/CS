@@ -1,29 +1,29 @@
-import { React, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Link as RouterLink } from 'react-router-dom'
 import {
-  Container,
-  Grid,
+  Box,
+  Button,
   Card,
   CardContent,
-  Typography,
-  Button,
-  Link,
+  Container,
+  Grid,
   LinearProgress,
-  Box,
+  Link,
+  Typography,
 } from '@mui/material'
+import { React, useEffect, useState } from 'react'
+import { Link as RouterLink } from 'react-router-dom'
+import { useAuth } from '../AuthProvider'
 
 export default function MainProfile() {
-  const user_id = sessionStorage.getItem('session_token')
+  const { userID } = useAuth()
   const [results, setResults] = useState(null)
   const [info, setInfo] = useState(null)
   const [articles, setArticles] = useState(null)
 
   async function fetchResults() {
     try {
-      if (user_id) {
+      if (userID) {
         const response = await fetch(
-          `http://127.0.0.1:8000/bias_test/api/get-profile/${user_id}`,
+          `http://127.0.0.1:8000/bias_test/api/get-profile/${userID}`,
           { method: 'GET' }
         )
         if (response.status === 200) {
@@ -31,7 +31,7 @@ export default function MainProfile() {
           setResults(data.data)
           setInfo(data.info)
           setArticles(data.articles_list)
-          
+
         }
       }
     } catch (error) {

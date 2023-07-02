@@ -1,27 +1,28 @@
-import React, { useEffect, useState } from 'react'
-import { Link as RouterLink } from 'react-router-dom'
 import {
-  Container,
-  Typography,
   Box,
   CircularProgress,
+  Container,
+  Link,
   Table,
+  TableBody,
+  TableCell,
   TableHead,
   TableRow,
-  TableCell,
-  TableBody,
-  Link,
+  Typography,
 } from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import { Link as RouterLink } from 'react-router-dom'
+import { useAuth } from '../AuthProvider'
 
 export default function BiasResult() {
   const [results, setResults] = useState(null)
-  const user_id = sessionStorage.getItem('session_token')
+  const { userID } = useAuth()
 
   useEffect(() => {
     async function fetchResults() {
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/bias_test/api/get-bias-results/${user_id}/`,
+          `http://127.0.0.1:8000/bias_test/api/get-bias-results/${userID}/`,
           {
             method: 'GET',
           }
@@ -34,7 +35,7 @@ export default function BiasResult() {
     }
 
     fetchResults()
-  }, [user_id])
+  }, [userID])
 
   if (!results) {
     return (

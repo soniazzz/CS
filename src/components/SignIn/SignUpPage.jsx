@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Container, Typography, TextField, Button, Grid, Box, Avatar} from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom'
+import { Container, Typography, TextField, Button, Grid, Box, Avatar } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Footer from '../Footer.jsx'
 
 export default function SignupPage() {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -34,7 +35,7 @@ export default function SignupPage() {
       if (data.error && data.error === 'Username already exists.') {
         alert('Username already exists. Please choose another one.')
       } else {
-        window.location.href = '/login'
+        navigate('/login')
       }
     } else {
       alert('Error signing up. Please try again.')

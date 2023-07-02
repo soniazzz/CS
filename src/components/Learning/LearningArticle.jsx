@@ -7,6 +7,7 @@ import FeaturedPost from './FeaturedPost.jsx'
 import LearningNav from './LearningNav.jsx'
 import Pagination from '@mui/material/Pagination'
 import Box from '@mui/material/Box'
+import { useAuth } from '../AuthProvider.jsx'
 
 export default function LearningArticle(props) {
   const { bias_index } = props
@@ -14,7 +15,7 @@ export default function LearningArticle(props) {
   const [recommend, setRecommend] = useState([])
   const [page, setPage] = useState(1)
   const [maxPages, setMaxPages] = useState(0)
-  const user_id = sessionStorage.getItem('session_token')
+  const { userID } = useAuth()
 
   useEffect(() => {
     setPage(1)
@@ -26,7 +27,7 @@ export default function LearningArticle(props) {
   }, [page])
 
   async function fetchArticles() {
-    if (user_id) {
+    if (userID) {
       try {
         const response = await fetch(
           `http://127.0.0.1:8000/bias_test/api/get-articles_of_type/${bias_index}/${page}`,

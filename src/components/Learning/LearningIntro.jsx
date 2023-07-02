@@ -1,16 +1,17 @@
-import { React, useState, useEffect } from 'react'
+import { Container, Grid } from '@mui/material'
+import { React, useEffect, useState } from 'react'
+import { useAuth } from '../AuthProvider'
 import LearningIntroArticle from './LearningIntroArticle'
 import LearningNav from './LearningNav'
 import MainFeaturedPost from './MainFeaturedPost.jsx'
-import { Container, Grid } from '@mui/material'
 
 export default function LearningIntro() {
   const [articles, setArticles] = useState([])
   const [recommend, setRecommend] = useState([])
-  const user_id = sessionStorage.getItem('session_token')
+  const { userID } = useAuth()
 
   useEffect(() => {
-    if (user_id) fetchArticles()
+    if (userID) fetchArticles()
   }, [])
 
   async function fetchArticles() {

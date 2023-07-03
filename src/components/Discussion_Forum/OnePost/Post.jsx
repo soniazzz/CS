@@ -141,6 +141,7 @@ export function Post(props) {
         <CardContent>
           <Box mb={5}>
             <PostDetail
+              post_index={post_index}
               title={post.title}
               poster={post.poster}
               postDate={post.postDate}

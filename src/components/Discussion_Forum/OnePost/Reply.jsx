@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { Box, Typography, Button, Avatar } from '@mui/material'
 import { styled } from '@mui/system'
@@ -26,10 +25,6 @@ export function Reply({ reply, isReply = false }){
           </ReplyTitle>
           <Box mt={1} display='flex' justifyContent='space-between'>
             <Box>
-              {/**<Typography variant='body2'>
-                Replied by {reply.poster + ' '} on{' '}
-                {reply.postDate.toLocaleDateString()}
-  </Typography>**/}
               <Typography variant='body2'>
                 Replied by {reply.poster + ' '} on{' '}
                 {reply.postDate.toLocaleString()}

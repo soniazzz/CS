@@ -11,12 +11,15 @@ import {
   Container,
   OutlinedInput
 } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
+
 
 
 export default function NewPost(props) {
   const [title, setTitle] = useState('')
   const [details, setDetails] = useState('')
   const [biasIndex, setBiasIndex] = useState('')
+  const navigate = useNavigate()
   
 
   async function handleSubmit() {
@@ -43,6 +46,8 @@ export default function NewPost(props) {
       setTitle('')
       setDetails('')
       setBiasIndex('')
+      alert('You have created a new post. You can view it in discussion forum.')
+      navigate('/discussion-forum')
     } else {
       console.error('Error creating post:', data.message)
     }
@@ -78,7 +83,7 @@ export default function NewPost(props) {
           </Grid>
           <Grid item xs={12}>
             <FormControl fullWidth required>
-              <InputLabel >Bias Type</InputLabel>
+              <InputLabel>Bias Type</InputLabel>
               <Select
                 label='Bias Type'
                 value={biasIndex}

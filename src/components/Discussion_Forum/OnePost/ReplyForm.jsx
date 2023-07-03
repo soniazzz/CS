@@ -5,6 +5,7 @@ export function ReplyForm({ postId, parentReply, onSubmit }) {
   const [details, setDetails] = useState('')
 
   const handleSubmit = () => {
+    console.log(postId, parentReply, details)
     onSubmit(postId, parentReply, details)
     setDetails('')
   }

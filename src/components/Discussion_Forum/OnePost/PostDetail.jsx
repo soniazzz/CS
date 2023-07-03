@@ -34,13 +34,10 @@ const handleReplySubmit = async (postId, parentReply, details) => {
     }
   
   )
-  const data = await response.json()
-  if (data.status === 'success') {
-   
-    alert('You have created a new reply.')
-  } else {
-    console.error('Error creating reply:', data.message)
-  }
+  alert('You have created a new reply.')
+  setShowReplyForm(false)
+  window.location.reload()
+  
 
 }
 

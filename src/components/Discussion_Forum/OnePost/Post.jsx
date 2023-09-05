@@ -9,6 +9,7 @@ export function Post(props) {
   const [replies, setReply] = useState([])
   console.log('the post index is' + post_index)
 
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -37,11 +38,12 @@ export function Post(props) {
   }, [post_index])
   
 
-  const renderReplies = (replies, isReply = false) => {
+  const renderReplies = (replies, isReply = false, level = 0) => {
+
     return replies.map((reply) => (
       <Box mb={2} key={reply.id}>
-        <Reply reply={reply} isReply={isReply} post_index={post_index} />
-        {renderReplies(reply.replies, true)}
+        <Reply reply={reply} isReply={isReply} post_index={post_index} level={level}/>
+        {renderReplies(reply.replies, true, level+1)}
       </Box>
     ))
   }

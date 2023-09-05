@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardContent, Container, Grid, Typography } from '@mui/material'
+import { AppBar, Box, Button, Card, CardContent, Container, Grid, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { useAuth } from '../../AuthProvider'
@@ -39,7 +39,19 @@ export default function DiscussionForum() {
           {/* Right Cards */}
           <Grid item xs={12} md={8}>
             {/* Upper Card - Navigation */}
-            <Card sx={{ height: 150 }}>
+            <Card sx={{ height: 165 }}>
+              <AppBar position='static'>
+                <Typography
+                  variant='h5'
+                  textAlign='left'
+                  fontStyle='bold'
+                  mt={1}
+                  mb={1}
+                  ml={2}
+                >
+                  Posts By Bias Type
+                </Typography>
+              </AppBar>
               <CardContent>
                 <Grid container spacing={2}>
                   {[
@@ -57,7 +69,7 @@ export default function DiscussionForum() {
                         variant='contained'
                         color='primary'
                         sx={{
-                          height: '50px',
+                          
                           width: '100%',
                         }}
                       >
@@ -69,22 +81,24 @@ export default function DiscussionForum() {
               </CardContent>
             </Card>
             {/* Bottom Card - Hot Posts */}
-            <Box mt={4}>
+            <Box mt={3}>
               <Grid container spacing={4}>
                 <Grid item xs={12} sm={12}>
-                  <Card sx={{ height: 550 }}>
-                    <CardContent>
-                      <Typography variant='h6' textAlign='left'>
+                  <Card sx={{ height: 543 }}>
+                    <AppBar position='static'>
+                      <Typography
+                        variant='h5'
+                        textAlign='left'
+                        fontStyle='bold'
+                        mt={1}
+                        mb={1}
+                        ml={2}
+                      >
                         Hot Posts
                       </Typography>
-                      <hr
-                        style={{
-                          margin: '8px 0',
-                          borderColor: 'rgba(0, 0, 0, 0.12)',
-                        }}
-                      />
-
-                      {allPosts.map((post, index) => (
+                    </AppBar>
+                    <CardContent>
+                      {allPosts.map((post) => (
                         <HotPost
                           post_index={post.post_index}
                           title={post.title}

@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material'
+import { AppBar, Grid } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -55,6 +55,18 @@ console.log('here the user_id is'+user_id)
   return (
     <Grid item xs={12} md={4}>
       <Card sx={{ height: 732 }}>
+        <AppBar position='static'>
+          <Typography
+            variant='h5'
+            textAlign='left'
+            fontStyle='bold'
+            mt={1}
+            mb={1}
+            ml={2}
+          >
+            Profile
+          </Typography>
+        </AppBar>
         <CardContent>
           <Box display='flex' justifyContent='center' mt={3} mb={5}>
             <img
@@ -79,7 +91,6 @@ console.log('here the user_id is'+user_id)
                 <Typography variant='h7'>
                   {bias + '：' + possibility}
                 </Typography>
-
                 <LinearProgress
                   variant='determinate'
                   value={parseFloat(possibility)}

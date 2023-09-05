@@ -24,7 +24,7 @@ export function HotPost(props) {
 
   return (
     <Box onClick={handleClick} style={{ cursor: 'pointer' }}>
-      <Typography variant='h6' textAlign='left'>
+      <Typography variant='h6' textAlign='left' fontStyle='bolder' color='primary'>
         {title}
       </Typography>
       <Box mt={1} display='flex' justifyContent='space-between'>
@@ -33,7 +33,7 @@ export function HotPost(props) {
         </Typography>
         <Box>
           <Typography variant='h7' textAlign='right'>
-            Posted by: {poster + ' '}
+            Posted by: {poster + ' on '}  
           </Typography>
           <Typography variant='h7' textAlign='right'>
             {postDate.toLocaleDateString()}
@@ -44,8 +44,8 @@ export function HotPost(props) {
       <Box
         mt={1}
         display='flex'
-        alignItems='center'
-        justifyContent='space-between'
+        
+        justifyContent='right'
       >
         <Chip
           label={`Replies: ${numberOfReplies}`}
@@ -53,9 +53,7 @@ export function HotPost(props) {
           color='primary'
           variant='outlined'
         />
-        <Typography variant='h7' textAlign='right'>
-          Last Repied by: {poster}
-        </Typography>
+        
       </Box>
 
       <hr style={{ margin: '8px 0', borderColor: 'rgba(0, 0, 0, 0.12)' }} />

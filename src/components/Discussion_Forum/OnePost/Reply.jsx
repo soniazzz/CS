@@ -5,18 +5,16 @@ import { ReplyForm } from './ReplyForm'
 
 const ReplyWrapper = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'isReply',
-})(({ theme, isReply }) => ({
+})(({ theme, isReply, level }) => ({
   marginTop: theme.spacing(1),
-  paddingLeft: isReply ? theme.spacing(4) : 0,
+  paddingLeft: isReply ? theme.spacing(4*level) : 0,
 }))
 
-const ReplyTitle = styled(Typography)({
-  fontWeight: 500,
-})
 
-export function Reply({ reply, isReply = false,post_index }) {
+
+export function Reply({ reply, isReply = false, post_index, level}) {
   const [showReplyForm, setShowReplyForm] = useState(false)
-
+  console.log(level+reply.title)
 
   const handleReplyButtonClick = () => {
     setShowReplyForm((prevShow) => !prevShow)
@@ -47,13 +45,11 @@ export function Reply({ reply, isReply = false,post_index }) {
   }
   
   return (
-    <ReplyWrapper isReply={isReply}>
+    <ReplyWrapper isReply={isReply} level={level}>
       <Box display='flex' alignItems='flex-start'>
         <Avatar alt={reply.poster} src={reply.avatar} />
         <Box ml={2} flexGrow={1} textAlign='left'>
-          <ReplyTitle variant='subtitle1'>
-            {reply.title}
-          </ReplyTitle>
+          <Typography variant='h6' fontStyle='bold'>{reply.title}</Typography>
           <Box mt={1} display='flex' justifyContent='space-between'>
             <Box>
               <Typography variant='body2'>
@@ -80,7 +76,6 @@ export function Reply({ reply, isReply = false,post_index }) {
               onSubmit={handleReplySubmit}
             />
           )}
-          
         </Box>
       </Box>
     </ReplyWrapper>
